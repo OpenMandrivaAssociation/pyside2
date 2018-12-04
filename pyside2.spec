@@ -55,8 +55,8 @@ Requires:	pyside2-core = %{version}
 PySide phonon module.
 
 %files phonon
-%{py_platsitedir}/PySide/phonon.so
-%{_datadir}/PySide/typesystems/typesystem_phonon.*
+%{py_platsitedir}/PySide2/phonon.so
+%{_datadir}/PySide2/typesystems/typesystem_phonon.*
 
 #------------------------------------------------------------------------------
 
@@ -68,11 +68,11 @@ Group:		Development/KDE and Qt
 PySide core module.
 
 %files core
-%{py_platsitedir}/PySide/QtCore.so
-%{py_platsitedir}/PySide/__init__.py
-%{py_platsitedir}/PySide/_utils.py
-%{_datadir}/PySide/typesystems/typesystem_core*
-%{_datadir}/PySide/typesystems/typesystem_templates.*
+%{py_platsitedir}/PySide2/QtCore.so
+%{py_platsitedir}/PySide2/__init__.py
+%{py_platsitedir}/PySide2/_utils.py
+%{_datadir}/PySide2/typesystems/typesystem_core*
+%{_datadir}/PySide2/typesystems/typesystem_templates.*
 
 #------------------------------------------------------------------------------
 
@@ -85,8 +85,8 @@ Requires:	pyside2-core = %{version}
 PySide declarative module.
 
 %files declarative
-%{py_platsitedir}/PySide/QtDeclarative.so
-%{_datadir}/PySide/typesystems/typesystem_declarative.*
+%{py_platsitedir}/PySide2/QtDeclarative.so
+%{_datadir}/PySide2/typesystems/typesystem_declarative.*
 
 #------------------------------------------------------------------------------
 
@@ -99,8 +99,8 @@ Requires:	pyside2-core = %{version}
 PySide gui module.
 
 %files gui
-%{py_platsitedir}/PySide/QtGui.so
-%{_datadir}/PySide/typesystems/typesystem_gui*
+%{py_platsitedir}/PySide2/QtGui.so
+%{_datadir}/PySide2/typesystems/typesystem_gui*
 
 #------------------------------------------------------------------------------
 
@@ -113,8 +113,8 @@ Requires:	pyside2-core = %{version}
 PySide help module.
 
 %files help
-%{py_platsitedir}/PySide/QtHelp.so
-%{_datadir}/PySide/typesystems/typesystem_help.*
+%{py_platsitedir}/PySide2/QtHelp.so
+%{_datadir}/PySide2/typesystems/typesystem_help.*
 
 #------------------------------------------------------------------------------
 
@@ -127,8 +127,8 @@ Requires:	pyside2-core = %{version}
 PySide multimedia module.
 
 %files multimedia
-%{py_platsitedir}/PySide/QtMultimedia.so
-%{_datadir}/PySide/typesystems/typesystem_multimedia*
+%{py_platsitedir}/PySide2/QtMultimedia.so
+%{_datadir}/PySide2/typesystems/typesystem_multimedia*
 
 #------------------------------------------------------------------------------
 
@@ -141,8 +141,8 @@ Requires:	pyside2-core = %{version}
 PySide network module.
 
 %files network
-%{py_platsitedir}/PySide/QtNetwork.so
-%{_datadir}/PySide/typesystems/typesystem_network.*
+%{py_platsitedir}/PySide2/QtNetwork.so
+%{_datadir}/PySide2/typesystems/typesystem_network.*
 
 #------------------------------------------------------------------------------
 
@@ -155,8 +155,8 @@ Requires:	pyside2-core = %{version}
 PySide opengl module.
 
 %files opengl
-%{py_platsitedir}/PySide/QtOpenGL.so
-%{_datadir}/PySide/typesystems/typesystem_opengl*
+%{py_platsitedir}/PySide2/QtOpenGL.so
+%{_datadir}/PySide2/typesystems/typesystem_opengl*
 
 #------------------------------------------------------------------------------
 
@@ -169,8 +169,8 @@ Requires:	pyside2-core = %{version}
 PySide script module.
 
 %files script
-%{py_platsitedir}/PySide/QtScript.so
-%{_datadir}/PySide/typesystems/typesystem_script.*
+%{py_platsitedir}/PySide2/QtScript.so
+%{_datadir}/PySide2/typesystems/typesystem_script.*
 
 #------------------------------------------------------------------------------
 
@@ -183,8 +183,8 @@ Requires:	pyside2-core = %{version}
 PySide scripttool module.
 
 %files scripttools
-%{py_platsitedir}/PySide/QtScriptTools.so
-%{_datadir}/PySide/typesystems/typesystem_scripttools.*
+%{py_platsitedir}/PySide2/QtScriptTools.so
+%{_datadir}/PySide2/typesystems/typesystem_scripttools.*
 
 #------------------------------------------------------------------------------
 
@@ -197,8 +197,8 @@ Requires:	pyside2-core = %{version}
 PySide sql module.
 
 %files sql
-%{py_platsitedir}/PySide/QtSql.so
-%{_datadir}/PySide/typesystems/typesystem_sql.*
+%{py_platsitedir}/PySide2/QtSql.so
+%{_datadir}/PySide2/typesystems/typesystem_sql.*
 
 #------------------------------------------------------------------------------
 
@@ -211,8 +211,8 @@ Requires:	pyside2-core = %{version}
 PySide svg module.
 
 %files svg
-%{py_platsitedir}/PySide/QtSvg.so
-%{_datadir}/PySide/typesystems/typesystem_svg.*
+%{py_platsitedir}/PySide2/QtSvg.so
+%{_datadir}/PySide2/typesystems/typesystem_svg.*
 
 #------------------------------------------------------------------------------
 
@@ -225,8 +225,8 @@ Requires:	pyside2-core = %{version}
 PySide test module.
 
 %files test
-%{py_platsitedir}/PySide/QtTest.so
-%{_datadir}/PySide/typesystems/typesystem_test.*
+%{py_platsitedir}/PySide2/QtTest.so
+%{_datadir}/PySide2/typesystems/typesystem_test.*
 
 #------------------------------------------------------------------------------
 
@@ -239,8 +239,8 @@ Requires:	pyside2-core = %{version}
 PySide uitools module.
 
 %files uitools
-%{py_platsitedir}/PySide/QtUiTools.so
-%{_datadir}/PySide/typesystems/typesystem_uitools.*
+%{py_platsitedir}/PySide2/QtUiTools.so
+%{_datadir}/PySide2/typesystems/typesystem_uitools.*
 
 #------------------------------------------------------------------------------
 
@@ -253,8 +253,8 @@ Requires:	pyside2-core = %{version}
 PySide webkit module.
 
 %files webkit
-%{py_platsitedir}/PySide/QtWebKit.so
-%{_datadir}/PySide/typesystems/typesystem_webkit*
+%{py_platsitedir}/PySide2/QtWebKit.so
+%{_datadir}/PySide2/typesystems/typesystem_webkit*
 
 #------------------------------------------------------------------------------
 
@@ -267,8 +267,8 @@ Requires:	pyside2-core = %{version}
 PySide xmlpatterns module.
 
 %files xmlpatterns
-%{py_platsitedir}/PySide/QtXmlPatterns.so
-%{_datadir}/PySide/typesystems/typesystem_xmlpatterns*
+%{py_platsitedir}/PySide2/QtXmlPatterns.so
+%{_datadir}/PySide2/typesystems/typesystem_xmlpatterns*
 
 #------------------------------------------------------------------------------
 
@@ -281,8 +281,8 @@ Requires:	pyside2-core = %{version}
 PySide xml module.
 
 %files xml
-%{py_platsitedir}/PySide/QtXml.so
-%{_datadir}/PySide/typesystems/typesystem_xml.*
+%{py_platsitedir}/PySide2/QtXml.so
+%{_datadir}/PySide2/typesystems/typesystem_xml.*
 
 #------------------------------------------------------------------------------
 
@@ -353,7 +353,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide phonon module.
 
 %files -n python2-pyside2-phonon
-%{py2_platsitedir}/PySide/phonon.so
+%{py2_platsitedir}/PySide2/phonon.so
 
 #------------------------------------------------------------------------------
 
@@ -365,9 +365,9 @@ Group:		Development/KDE and Qt
 PySide core module.
 
 %files -n python2-pyside2-core
-%{py2_platsitedir}/PySide/QtCore.so
-%{py2_platsitedir}/PySide/__init__.py
-%{py2_platsitedir}/PySide/_utils.py
+%{py2_platsitedir}/PySide2/QtCore.so
+%{py2_platsitedir}/PySide2/__init__.py
+%{py2_platsitedir}/PySide2/_utils.py
 
 #------------------------------------------------------------------------------
 
@@ -380,7 +380,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide declarative module.
 
 %files -n python2-pyside2-declarative
-%{py2_platsitedir}/PySide/QtDeclarative.so
+%{py2_platsitedir}/PySide2/QtDeclarative.so
 
 #------------------------------------------------------------------------------
 
@@ -393,7 +393,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide gui module.
 
 %files -n python2-pyside2-gui
-%{py2_platsitedir}/PySide/QtGui.so
+%{py2_platsitedir}/PySide2/QtGui.so
 #------------------------------------------------------------------------------
 
 %package -n python2-pyside2-help
@@ -405,7 +405,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide help module.
 
 %files -n python2-pyside2-help
-%{py2_platsitedir}/PySide/QtHelp.so
+%{py2_platsitedir}/PySide2/QtHelp.so
 
 #------------------------------------------------------------------------------
 
@@ -418,7 +418,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide multimedia module.
 
 %files -n python2-pyside2-multimedia
-%{py2_platsitedir}/PySide/QtMultimedia.so
+%{py2_platsitedir}/PySide2/QtMultimedia.so
 
 #------------------------------------------------------------------------------
 
@@ -431,7 +431,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide network module.
 
 %files -n python2-pyside2-network
-%{py2_platsitedir}/PySide/QtNetwork.so
+%{py2_platsitedir}/PySide2/QtNetwork.so
 
 #------------------------------------------------------------------------------
 
@@ -444,7 +444,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide opengl module.
 
 %files -n python2-pyside2-opengl
-%{py2_platsitedir}/PySide/QtOpenGL.so
+%{py2_platsitedir}/PySide2/QtOpenGL.so
 
 #------------------------------------------------------------------------------
 
@@ -457,7 +457,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide script module.
 
 %files -n python2-pyside2-script
-%{py2_platsitedir}/PySide/QtScript.so
+%{py2_platsitedir}/PySide2/QtScript.so
 
 #------------------------------------------------------------------------------
 
@@ -470,7 +470,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide scripttool module.
 
 %files -n python2-pyside2-scripttools
-%{py2_platsitedir}/PySide/QtScriptTools.so
+%{py2_platsitedir}/PySide2/QtScriptTools.so
 
 #------------------------------------------------------------------------------
 
@@ -483,7 +483,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide sql module.
 
 %files -n python2-pyside2-sql
-%{py2_platsitedir}/PySide/QtSql.so
+%{py2_platsitedir}/PySide2/QtSql.so
 
 #------------------------------------------------------------------------------
 
@@ -496,7 +496,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide svg module.
 
 %files -n python2-pyside2-svg
-%{py2_platsitedir}/PySide/QtSvg.so
+%{py2_platsitedir}/PySide2/QtSvg.so
 
 #------------------------------------------------------------------------------
 
@@ -509,7 +509,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide test module.
 
 %files -n python2-pyside2-test
-%{py2_platsitedir}/PySide/QtTest.so
+%{py2_platsitedir}/PySide2/QtTest.so
 
 #------------------------------------------------------------------------------
 
@@ -522,7 +522,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide uitools module.
 
 %files -n python2-pyside2-uitools
-%{py2_platsitedir}/PySide/QtUiTools.so
+%{py2_platsitedir}/PySide2/QtUiTools.so
 
 #------------------------------------------------------------------------------
 
@@ -535,7 +535,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide webkit module.
 
 %files -n python2-pyside2-webkit
-%{py2_platsitedir}/PySide/QtWebKit.so
+%{py2_platsitedir}/PySide2/QtWebKit.so
 
 #------------------------------------------------------------------------------
 
@@ -548,7 +548,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide xmlpatterns module.
 
 %files -n python2-pyside2-xmlpatterns
-%{py2_platsitedir}/PySide/QtXmlPatterns.so
+%{py2_platsitedir}/PySide2/QtXmlPatterns.so
 
 #------------------------------------------------------------------------------
 
@@ -561,7 +561,7 @@ Requires:	python2-pyside2-core = %{version}
 PySide xml module.
 
 %files -n python2-pyside2-xml
-%{py2_platsitedir}/PySide/QtXml.so
+%{py2_platsitedir}/PySide2/QtXml.so
 
 #------------------------------------------------------------------------------
 
@@ -593,16 +593,17 @@ cp -a . %py2dir
 
 %build
 
+RPM_BUILD_NCPUS=$(/usr/bin/getconf _NPROCESSORS_ONLN)
+
 %define Werror_cflags %nil
 pushd %{py2dir}
-%__python2 setup.py build
+%__python2 setup.py build --jobs=$RPM_BUILD_NCPUS
 popd
-%__python setup.py build
-%make
+%__python setup.py build --jobs=$RPM_BUILD_NCPUS
 
 %install
 pushd %{py2dir}
-%makeinstall_std -C build
+%__python2 setup.py install --skip-build --root=%{buildroot}
 popd
 
-%makeinstall_std -C build
+%__python setup.py install --skip-build --root=%{buildroot}
