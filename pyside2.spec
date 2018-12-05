@@ -1,5 +1,8 @@
 %define py3verflags %(python3 -c "import sysconfig; print(sysconfig.get_config_var('SOABI'))")
 %define py2verflags -python2.7
+%define api 5.9
+
+%define debug_package %{nil}
 
 Summary:	The PySide project provides LGPL-licensed Python bindings for Qt5
 Name:		pyside2
@@ -9,6 +12,7 @@ License:	LGPLv2+
 Group:		Development/KDE and Qt
 Url:		https://wiki.qt.io/Qt_for_Python
 Source0:	pyside-setup-everywhere-src-%{version}a1.tar.xz
+Source100:	%{name}.rpmlintrc
 BuildRequires:	cmake
 BuildRequires:	qt5-devel
 BuildRequires:	pkgconfig(Qt5WebKit)
@@ -18,9 +22,8 @@ BuildRequires:  python2-setuptools
 BuildRequires:	pkgconfig(python3)
 BuildRequires:  python-setuptools 
 BuildRequires:	python-sphinx
-Requires:	pyside2-phonon
+Requires:	python-shiboken2
 Requires:	pyside2-core
-Requires:	pyside2-declarative
 Requires:	pyside2-gui
 Requires:	pyside2-help
 Requires:	pyside2-multimedia
@@ -34,7 +37,22 @@ Requires:	pyside2-xmlpatterns
 Requires:	pyside2-xml
 Requires:	pyside2-uitools
 Requires:	pyside2-svg
-Requires:	pyside2-webkit
+Requires:	pyside2-webengine
+Requires:	pyside2-charts
+Requires:	pyside2-concurrent
+Requires:	pyside2-location
+Requires:	pyside2-multimediawidgets
+Requires:	pyside2-positioning
+Requires:	pyside2-printsupport
+Requires:	pyside2-qml
+Requires:	pyside2-quick
+Requires:	pyside2-quickwidgets
+Requires:	pyside2-sensors
+Requires:	pyside2-texttospeech
+Requires:	pyside2-webchannel
+Requires:	pyside2-websockets
+Requires:	pyside2-widgets
+Requires:	pyside2-x11extras
 
 %description
 The PySide project provides LGPL-licensed Python bindings for the Qt
@@ -46,20 +64,6 @@ all of the platforms as Qt itself.
 
 #------------------------------------------------------------------------------
 
-%package phonon
-Summary:	PySide phonon module
-Group:		Development/KDE and Qt
-Requires:	pyside2-core = %{version}
-
-%description phonon
-PySide phonon module.
-
-%files phonon
-%{py_platsitedir}/PySide2/phonon.so
-%{_datadir}/PySide2/typesystems/typesystem_phonon.*
-
-#------------------------------------------------------------------------------
-
 %package core
 Summary:	PySide core module
 Group:		Development/KDE and Qt
@@ -68,25 +72,15 @@ Group:		Development/KDE and Qt
 PySide core module.
 
 %files core
-%{py_platsitedir}/PySide2/QtCore.so
+%{py_platsitedir}/*.egg-info
+%{py_platsitedir}/PySide2/QtCore.*.so
 %{py_platsitedir}/PySide2/__init__.py
-%{py_platsitedir}/PySide2/_utils.py
-%{_datadir}/PySide2/typesystems/typesystem_core*
-%{_datadir}/PySide2/typesystems/typesystem_templates.*
-
-#------------------------------------------------------------------------------
-
-%package declarative
-Summary:	PySide declarative module
-Group:		Development/KDE and Qt
-Requires:	pyside2-core = %{version}
-
-%description declarative
-PySide declarative module.
-
-%files declarative
-%{py_platsitedir}/PySide2/QtDeclarative.so
-%{_datadir}/PySide2/typesystems/typesystem_declarative.*
+%{py_platsitedir}/PySide2/_config.py
+%{py_platsitedir}/PySide2/_git_pyside_version.py
+%{py_platsitedir}/PySide2/typesystems/typesystem_core*
+%{py_platsitedir}/PySide2/typesystems/typesystem_templates.*
+%{py_platsitedir}/PySide2/libpyside2.%{py3verflags}.so.%{api}*
+%{py_platsitedir}/PySide2/support
 
 #------------------------------------------------------------------------------
 
@@ -99,8 +93,8 @@ Requires:	pyside2-core = %{version}
 PySide gui module.
 
 %files gui
-%{py_platsitedir}/PySide2/QtGui.so
-%{_datadir}/PySide2/typesystems/typesystem_gui*
+%{py_platsitedir}/PySide2/QtGui.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_gui*
 
 #------------------------------------------------------------------------------
 
@@ -113,8 +107,8 @@ Requires:	pyside2-core = %{version}
 PySide help module.
 
 %files help
-%{py_platsitedir}/PySide2/QtHelp.so
-%{_datadir}/PySide2/typesystems/typesystem_help.*
+%{py_platsitedir}/PySide2/QtHelp.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_help.*
 
 #------------------------------------------------------------------------------
 
@@ -127,8 +121,9 @@ Requires:	pyside2-core = %{version}
 PySide multimedia module.
 
 %files multimedia
-%{py_platsitedir}/PySide2/QtMultimedia.so
-%{_datadir}/PySide2/typesystems/typesystem_multimedia*
+%{py_platsitedir}/PySide2/QtMultimedia.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_multimedia.xml
+%{py_platsitedir}/PySide2/typesystems/typesystem_multimedia_*
 
 #------------------------------------------------------------------------------
 
@@ -141,8 +136,8 @@ Requires:	pyside2-core = %{version}
 PySide network module.
 
 %files network
-%{py_platsitedir}/PySide2/QtNetwork.so
-%{_datadir}/PySide2/typesystems/typesystem_network.*
+%{py_platsitedir}/PySide2/QtNetwork.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_network.*
 
 #------------------------------------------------------------------------------
 
@@ -155,8 +150,8 @@ Requires:	pyside2-core = %{version}
 PySide opengl module.
 
 %files opengl
-%{py_platsitedir}/PySide2/QtOpenGL.so
-%{_datadir}/PySide2/typesystems/typesystem_opengl*
+%{py_platsitedir}/PySide2/QtOpenGL.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_opengl*
 
 #------------------------------------------------------------------------------
 
@@ -169,8 +164,8 @@ Requires:	pyside2-core = %{version}
 PySide script module.
 
 %files script
-%{py_platsitedir}/PySide2/QtScript.so
-%{_datadir}/PySide2/typesystems/typesystem_script.*
+%{py_platsitedir}/PySide2/QtScript.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_script.*
 
 #------------------------------------------------------------------------------
 
@@ -183,8 +178,8 @@ Requires:	pyside2-core = %{version}
 PySide scripttool module.
 
 %files scripttools
-%{py_platsitedir}/PySide2/QtScriptTools.so
-%{_datadir}/PySide2/typesystems/typesystem_scripttools.*
+%{py_platsitedir}/PySide2/QtScriptTools.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_scripttools.*
 
 #------------------------------------------------------------------------------
 
@@ -197,8 +192,8 @@ Requires:	pyside2-core = %{version}
 PySide sql module.
 
 %files sql
-%{py_platsitedir}/PySide2/QtSql.so
-%{_datadir}/PySide2/typesystems/typesystem_sql.*
+%{py_platsitedir}/PySide2/QtSql.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_sql.*
 
 #------------------------------------------------------------------------------
 
@@ -211,8 +206,8 @@ Requires:	pyside2-core = %{version}
 PySide svg module.
 
 %files svg
-%{py_platsitedir}/PySide2/QtSvg.so
-%{_datadir}/PySide2/typesystems/typesystem_svg.*
+%{py_platsitedir}/PySide2/QtSvg.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_svg.*
 
 #------------------------------------------------------------------------------
 
@@ -225,8 +220,8 @@ Requires:	pyside2-core = %{version}
 PySide test module.
 
 %files test
-%{py_platsitedir}/PySide2/QtTest.so
-%{_datadir}/PySide2/typesystems/typesystem_test.*
+%{py_platsitedir}/PySide2/QtTest.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_test.*
 
 #------------------------------------------------------------------------------
 
@@ -239,22 +234,22 @@ Requires:	pyside2-core = %{version}
 PySide uitools module.
 
 %files uitools
-%{py_platsitedir}/PySide2/QtUiTools.so
-%{_datadir}/PySide2/typesystems/typesystem_uitools.*
+%{py_platsitedir}/PySide2/QtUiTools.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_uitools.*
 
 #------------------------------------------------------------------------------
 
-%package webkit
-Summary:	PySide webkit module
+%package webengine
+Summary:	PySide webengine module
 Group:		Development/KDE and Qt
 Requires:	pyside2-core = %{version}
 
-%description webkit
-PySide webkit module.
+%description webengine
+PySide webengine module.
 
-%files webkit
-%{py_platsitedir}/PySide2/QtWebKit.so
-%{_datadir}/PySide2/typesystems/typesystem_webkit*
+%files webengine
+%{py_platsitedir}/PySide2/QtWebEngine*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_webengine*
 
 #------------------------------------------------------------------------------
 
@@ -267,8 +262,8 @@ Requires:	pyside2-core = %{version}
 PySide xmlpatterns module.
 
 %files xmlpatterns
-%{py_platsitedir}/PySide2/QtXmlPatterns.so
-%{_datadir}/PySide2/typesystems/typesystem_xmlpatterns*
+%{py_platsitedir}/PySide2/QtXmlPatterns.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_xmlpatterns*
 
 #------------------------------------------------------------------------------
 
@@ -281,47 +276,237 @@ Requires:	pyside2-core = %{version}
 PySide xml module.
 
 %files xml
-%{py_platsitedir}/PySide2/QtXml.so
-%{_datadir}/PySide2/typesystems/typesystem_xml.*
+%{py_platsitedir}/PySide2/QtXml.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_xml.*
 
 #------------------------------------------------------------------------------
 
-%define api 1.2
-%define libname %mklibname pyside.%{py3verflags} %{api}
+%package charts
+Summary:        PySide charts module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
 
-%package -n %{libname}
-Summary:	PySide core library
-Group:		Development/KDE and Qt
-Obsoletes:	%{_lib}pyside1 < 1.1.2-2
+%description charts
+PySide charts module.
 
-%description -n %{libname}
-PySide core library.
-
-%files -n %{libname}
-%{_libdir}/libpyside.%{py3verflags}.so.%{api}*
-
+%files charts
+%{py_platsitedir}/PySide2/QtCharts.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_charts*
 
 #------------------------------------------------------------------------------
 
-%define api 1.2
-%define libname_py2 %mklibname pyside%{py2verflags} %{api}
+%package concurrent
+Summary:        PySide concurrent module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
 
-%package -n %{libname_py2}
-Summary:        PySide core library
+%description concurrent
+PySide concurrent module.
+
+%files concurrent
+%{py_platsitedir}/PySide2/QtConcurrent.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_concurrent*
+
+#------------------------------------------------------------------------------
+
+%package location
+Summary:        PySide location module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description location
+PySide location module.
+
+%files location
+%{py_platsitedir}/PySide2/QtLocation.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_location*
+
+#------------------------------------------------------------------------------
+
+%package multimediawidgets
+Summary:        PySide multimediawidgets module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description multimediawidgets
+PySide multimediawidgets module.
+
+%files multimediawidgets
+%{py_platsitedir}/PySide2/QtMultimediaWidgets.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_multimediawidgets*
+
+#------------------------------------------------------------------------------
+
+%package positioning
+Summary:        PySide positioning module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description positioning
+PySide positioning module.
+
+%files positioning
+%{py_platsitedir}/PySide2/QtPositioning.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_positioning*
+
+#------------------------------------------------------------------------------
+
+%package printsupport
+Summary:        PySide printsupport module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description printsupport
+PySide printsupport module.
+
+%files printsupport
+%{py_platsitedir}/PySide2/QtPrintSupport.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_printsupport*
+
+#------------------------------------------------------------------------------
+
+%package qml
+Summary:        PySide qml module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description qml
+PySide qml module.
+
+%files qml
+%{py_platsitedir}/PySide2/QtQml.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_qml*
+
+#------------------------------------------------------------------------------
+
+%package quick
+Summary:        PySide quick module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description quick
+PySide quick module.
+
+%files quick
+%{py_platsitedir}/PySide2/QtQuick.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_quick.xml
+
+#------------------------------------------------------------------------------
+
+%package quickwidgets
+Summary:        PySide quickwidgets module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description quickwidgets
+PySide quickwidgets module.
+
+%files quickwidgets
+%{py_platsitedir}/PySide2/QtQuickWidgets.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_quickwidgets*
+
+#------------------------------------------------------------------------------
+
+%package sensors
+Summary:        PySide sensors module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description sensors
+PySide sensors module.
+
+%files sensors
+%{py_platsitedir}/PySide2/QtSensors.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_sensors*
+
+#------------------------------------------------------------------------------
+
+%package texttospeech
+Summary:        PySide texttospeech module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description texttospeech
+PySide texttospeech module.
+
+%files texttospeech
+%{py_platsitedir}/PySide2/QtTextToSpeech.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_texttospeech*
+
+#------------------------------------------------------------------------------
+
+%package webchannel
+Summary:        PySide webchannel module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description webchannel
+PySide webchannel module.
+
+%files webchannel
+%{py_platsitedir}/PySide2/QtWebChannel.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_webchannel*
+
+#------------------------------------------------------------------------------
+
+%package websockets
+Summary:        PySide websockets module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description websockets
+PySide websockets module.
+
+%files websockets
+%{py_platsitedir}/PySide2/QtWebSockets.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_websockets*
+
+#------------------------------------------------------------------------------
+
+%package widgets
+Summary:        PySide widgets module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description widgets
+PySide widgets module.
+
+%files widgets
+%{py_platsitedir}/PySide2/QtWidgets.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_widgets*
+
+#------------------------------------------------------------------------------
+
+%package x11extras
+Summary:        PySide x11extras module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description x11extras
+PySide x11extras module.
+
+%files x11extras
+%{py_platsitedir}/PySide2/QtX11Extras.*.so
+%{py_platsitedir}/PySide2/typesystems/typesystem_x11extras*
+
+#------------------------------------------------------------------------------
+
+%package -n python-shiboken2
+Summary:        PySide shiboken2 module
 Group:          Development/KDE and Qt
 
-%description -n %{libname_py2}
-PySide core library.
+%description -n python-shiboken2
+PySide shiboken2 module.
 
-%files -n %{libname_py2}
-%{_libdir}/libpyside%{py2verflags}.so.%{api}*
+%files -n python-shiboken2
+%{py_platsitedir}/PySide2/libshiboken2.*
+%{py_platsitedir}/PySide2/shiboken2*
 
 #------------------------------------------------------------------------------
 
-%package -n python2-pyside
-Requires:       python2-pyside2-phonon
+%package -n python2-pyside2
+Requires:	python-shiboken2
 Requires:       python2-pyside2-core
-Requires:       python2-pyside2-declarative
 Requires:       python2-pyside2-gui
 Requires:       python2-pyside2-help
 Requires:       python2-pyside2-multimedia
@@ -335,25 +520,27 @@ Requires:       python2-pyside2-xmlpatterns
 Requires:       python2-pyside2-xml
 Requires:       python2-pyside2-uitools
 Requires:       python2-pyside2-svg
-Requires:       python2-pyside2-webkit
+Requires:       python2-pyside2-webengine
+Requires:	python2-pyside2-charts
+Requires:	python2-pyside2-concurrent
+Requires:	python2-pyside2-location
+Requires: 	python2-pyside2-multimediawidgets
+Requires:	python2-pyside2-positioning
+Requires:	python2-pyside2-printsupport
+Requires:	python2-pyside2-qml
+Requires:	python2-pyside2-quick
+Requires:	python2-pyside2-quickwidgets
+Requires:	python2-pyside2-sensors
+Requires:	python2-pyside2-texttospeech
+Requires:	python2-pyside2-webchannel
+Requires:	python2-pyside2-websockets
+Requires:	python2-pyside2-widgets
+Requires:	python2-pyside2-x11extras
 
-%description -n python2-pyside
-Pyside for python2.
+%description -n python2-pyside2
+Pyside2 for python2.
 
-%files -n python2-pyside
-
-#------------------------------------------------------------------------------
-
-%package -n python2-pyside2-phonon
-Summary:	PySide phonon module
-Group:		Development/KDE and Qt
-Requires:	python2-pyside2-core = %{version}
-
-%description -n python2-pyside2-phonon
-PySide phonon module.
-
-%files -n python2-pyside2-phonon
-%{py2_platsitedir}/PySide2/phonon.so
+%files -n python2-pyside2
 
 #------------------------------------------------------------------------------
 
@@ -365,22 +552,15 @@ Group:		Development/KDE and Qt
 PySide core module.
 
 %files -n python2-pyside2-core
+%{py2_platsitedir}/*.egg-info
 %{py2_platsitedir}/PySide2/QtCore.so
 %{py2_platsitedir}/PySide2/__init__.py
-%{py2_platsitedir}/PySide2/_utils.py
-
-#------------------------------------------------------------------------------
-
-%package -n python2-pyside2-declarative
-Summary:	PySide declarative module
-Group:		Development/KDE and Qt
-Requires:	python2-pyside2-core = %{version}
-
-%description -n python2-pyside2-declarative
-PySide declarative module.
-
-%files -n python2-pyside2-declarative
-%{py2_platsitedir}/PySide2/QtDeclarative.so
+%{py2_platsitedir}/PySide2/_config.py
+%{py2_platsitedir}/PySide2/_git_pyside_version.py
+%{py2_platsitedir}/PySide2/libpyside2%{py2verflags}.so.%{api}*
+%{py2_platsitedir}/PySide2/typesystems/typesystem_core*
+%{py2_platsitedir}/PySide2/typesystems/typesystem_templates.*
+%{py2_platsitedir}/PySide2/support
 
 #------------------------------------------------------------------------------
 
@@ -394,6 +574,8 @@ PySide gui module.
 
 %files -n python2-pyside2-gui
 %{py2_platsitedir}/PySide2/QtGui.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_gui*
+
 #------------------------------------------------------------------------------
 
 %package -n python2-pyside2-help
@@ -406,6 +588,7 @@ PySide help module.
 
 %files -n python2-pyside2-help
 %{py2_platsitedir}/PySide2/QtHelp.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_help.*
 
 #------------------------------------------------------------------------------
 
@@ -419,6 +602,9 @@ PySide multimedia module.
 
 %files -n python2-pyside2-multimedia
 %{py2_platsitedir}/PySide2/QtMultimedia.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_multimedia.xml
+%{py2_platsitedir}/PySide2/typesystems/typesystem_multimedia_*
+
 
 #------------------------------------------------------------------------------
 
@@ -432,6 +618,7 @@ PySide network module.
 
 %files -n python2-pyside2-network
 %{py2_platsitedir}/PySide2/QtNetwork.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_network.*
 
 #------------------------------------------------------------------------------
 
@@ -445,6 +632,7 @@ PySide opengl module.
 
 %files -n python2-pyside2-opengl
 %{py2_platsitedir}/PySide2/QtOpenGL.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_opengl*
 
 #------------------------------------------------------------------------------
 
@@ -458,6 +646,7 @@ PySide script module.
 
 %files -n python2-pyside2-script
 %{py2_platsitedir}/PySide2/QtScript.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_script.*
 
 #------------------------------------------------------------------------------
 
@@ -471,6 +660,7 @@ PySide scripttool module.
 
 %files -n python2-pyside2-scripttools
 %{py2_platsitedir}/PySide2/QtScriptTools.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_scripttools.*
 
 #------------------------------------------------------------------------------
 
@@ -484,6 +674,7 @@ PySide sql module.
 
 %files -n python2-pyside2-sql
 %{py2_platsitedir}/PySide2/QtSql.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_sql.*
 
 #------------------------------------------------------------------------------
 
@@ -497,6 +688,7 @@ PySide svg module.
 
 %files -n python2-pyside2-svg
 %{py2_platsitedir}/PySide2/QtSvg.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_svg.*
 
 #------------------------------------------------------------------------------
 
@@ -510,6 +702,7 @@ PySide test module.
 
 %files -n python2-pyside2-test
 %{py2_platsitedir}/PySide2/QtTest.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_test.*
 
 #------------------------------------------------------------------------------
 
@@ -523,19 +716,21 @@ PySide uitools module.
 
 %files -n python2-pyside2-uitools
 %{py2_platsitedir}/PySide2/QtUiTools.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_uitools.*
 
 #------------------------------------------------------------------------------
 
-%package -n python2-pyside2-webkit
-Summary:	PySide webkit module
+%package -n python2-pyside2-webengine
+Summary:	PySide webengine module
 Group:		Development/KDE and Qt
 Requires:	python2-pyside2-core = %{version}
 
-%description -n python2-pyside2-webkit
-PySide webkit module.
+%description -n python2-pyside2-webengine
+PySide webengine module.
 
-%files -n python2-pyside2-webkit
-%{py2_platsitedir}/PySide2/QtWebKit.so
+%files -n python2-pyside2-webengine
+%{py2_platsitedir}/PySide2/QtWebEngine*.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_webengine*
 
 #------------------------------------------------------------------------------
 
@@ -549,6 +744,7 @@ PySide xmlpatterns module.
 
 %files -n python2-pyside2-xmlpatterns
 %{py2_platsitedir}/PySide2/QtXmlPatterns.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_xmlpatterns*
 
 #------------------------------------------------------------------------------
 
@@ -562,26 +758,259 @@ PySide xml module.
 
 %files -n python2-pyside2-xml
 %{py2_platsitedir}/PySide2/QtXml.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_xml.*
 
 #------------------------------------------------------------------------------
+
+%package -n python2-pyside2-charts
+Summary:        PySide2 charts module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-charts
+PySide2 charts module.
+
+%files -n python2-pyside2-charts
+%{py2_platsitedir}/PySide2/QtCharts.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_charts*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-concurrent
+Summary:        PySide2 concurrent module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-concurrent
+PySide2 concurrent module.
+
+%files -n python2-pyside2-concurrent
+%{py2_platsitedir}/PySide2/QtConcurrent.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_concurrent*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-location
+Summary:        PySide2 location module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-location
+PySide2 location module.
+
+%files -n python2-pyside2-location
+%{py2_platsitedir}/PySide2/QtLocation.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_location*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-multimediawidgets
+Summary:        PySide2 multimediawidgets module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-multimediawidgets
+PySide2 multimediawidgets module.
+
+%files -n python2-pyside2-multimediawidgets
+%{py2_platsitedir}/PySide2/QtMultimediaWidgets.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_multimediawidgets*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-positioning
+Summary:        PySide2 positioning module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-positioning
+PySide2 positioning module.
+
+%files -n python2-pyside2-positioning
+%{py2_platsitedir}/PySide2/QtPositioning.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_positioning*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-printsupport
+Summary:        PySide2 printsupport module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-printsupport
+PySide2 printsupport module.
+
+%files -n python2-pyside2-printsupport
+%{py2_platsitedir}/PySide2/QtPrintSupport.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_printsupport*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-qml
+Summary:        PySide2 qml module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-qml
+PySide2 qml module.
+
+%files -n python2-pyside2-qml
+%{py2_platsitedir}/PySide2/QtQml.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_qml*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-quick
+Summary:        PySide2 quick module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-quick
+PySide2 quick module.
+
+%files -n python2-pyside2-quick
+%{py2_platsitedir}/PySide2/QtQuick.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_quick.xml
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-quickwidgets
+Summary:        PySide2 quickwidgets module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-quickwidgets
+PySide2 quickwidgets module.
+
+%files -n python2-pyside2-quickwidgets
+%{py2_platsitedir}/PySide2/QtQuickWidgets.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_quickwidgets*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-sensors
+Summary:        PySide2 sensors module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-sensors
+PySide2 sensors module.
+
+%files -n python2-pyside2-sensors
+%{py2_platsitedir}/PySide2/QtSensors.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_sensors*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-texttospeech
+Summary:        PySide2 texttospeech module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-texttospeech
+PySide2 texttospeech module.
+
+%files -n python2-pyside2-texttospeech
+%{py2_platsitedir}/PySide2/QtTextToSpeech.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_texttospeech*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-webchannel
+Summary:        PySide2 webchannel module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-webchannel
+PySide2 webchannel module.
+
+%files -n python2-pyside2-webchannel
+%{py2_platsitedir}/PySide2/QtWebChannel.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_webchannel*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-websockets
+Summary:        PySide2 websockets module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-websockets
+PySide2 websockets module.
+
+%files -n python2-pyside2-websockets
+%{py2_platsitedir}/PySide2/QtWebSockets.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_websockets*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-widgets
+Summary:        PySide2 widgets module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-widgets
+PySide2 widgets module.
+
+%files -n python2-pyside2-widgets
+%{py2_platsitedir}/PySide2/QtWidgets.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_widgets*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-x11extras
+Summary:        PySide2 x11extras module
+Group:          Development/KDE and Qt
+Requires:       python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-x11extras
+PySide2 x11extras module.
+
+%files -n python2-pyside2-x11extras
+%{py2_platsitedir}/PySide2/QtX11Extras.so
+%{py2_platsitedir}/PySide2/typesystems/typesystem_x11extras*
+
+#------------------------------------------------------------------------------
+
+%package -n python2-shiboken2
+Summary:        PySide shiboken2 module
+Group:          Development/KDE and Qt
+
+%description -n python2-shiboken2
+PySide shiboken2 module.
+
+%files -n python2-shiboken2
+%{py2_platsitedir}/PySide2/libshiboken2*
+%{py2_platsitedir}/PySide2/shiboken2*
+
+#------------------------------------------------------------------------------
+
 
 %package devel
 Summary:        PySide devel files
 Group:          Development/KDE and Qt
 Requires:       %{name} = %{version}-%{release}
 Requires:       python2-%{name} = %{version}-%{release}
-Requires:       %{libname} = %{version}-%{release}
-Requires:       %{libname_py2} = %{version}-%{release}
 
 %description devel
 PySide devel files.
 
 %files devel
-%{_libdir}/*.so
-%{_includedir}/*
-%{_libdir}/pkgconfig/*
-%{_libdir}/cmake/*
-
+%{py2_platsitedir}/pyside2uic
+%{py2_platsitedir}/PySide2/pyside2-rcc
+%{py2_platsitedir}/PySide2/pyside2-lupdate
+%{py2_platsitedir}/PySide2/include
+%{py2_platsitedir}/PySide2/examples
+%{py2_platsitedir}/PySide2/scripts
+%{py2_platsitedir}/PySide2/docs
+%{py3_platsitedir}/pyside2uic
+%{py3_platsitedir}/PySide2/pyside2-rcc
+%{py3_platsitedir}/PySide2/pyside2-lupdate
+%{py3_platsitedir}/PySide2/include
+%{py3_platsitedir}/PySide2/examples
+%{py3_platsitedir}/PySide2/scripts
+%{py3_platsitedir}/PySide2/docs
+%{_bindir}/pyside2-uic
 
 #------------------------------------------------------------------------------
 
