@@ -1,3 +1,5 @@
+%define _disable_ld_no_undefined 1
+
 %define py3verflags %(python3 -c "import sysconfig; print(sysconfig.get_config_var('SOABI'))")
 %define py2verflags -python2.7
 %define api 5.9
@@ -72,15 +74,13 @@ Group:		Development/KDE and Qt
 PySide core module.
 
 %files core
-%{py_platsitedir}/*.egg-info
 %{py_platsitedir}/PySide2/QtCore.*.so
 %{py_platsitedir}/PySide2/__init__.py
 %{py_platsitedir}/PySide2/_config.py
 %{py_platsitedir}/PySide2/_git_pyside_version.py
-%{py_platsitedir}/PySide2/typesystems/typesystem_core*
-%{py_platsitedir}/PySide2/typesystems/typesystem_templates.*
-%{py_platsitedir}/PySide2/libpyside2.%{py3verflags}.so.%{api}*
-%{py_platsitedir}/PySide2/support
+%{_datadir}/PySide2/typesystems/typesystem_core*
+%{_datadir}/PySide2/typesystems/typesystem_templates.*
+%{_libdir}/libpyside2.%{py3verflags}.so.%{api}*
 
 #------------------------------------------------------------------------------
 
@@ -94,7 +94,7 @@ PySide gui module.
 
 %files gui
 %{py_platsitedir}/PySide2/QtGui.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_gui*
+%{_datadir}/PySide2/typesystems/typesystem_gui*
 
 #------------------------------------------------------------------------------
 
@@ -108,7 +108,7 @@ PySide help module.
 
 %files help
 %{py_platsitedir}/PySide2/QtHelp.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_help.*
+%{_datadir}/PySide2/typesystems/typesystem_help.*
 
 #------------------------------------------------------------------------------
 
@@ -122,8 +122,8 @@ PySide multimedia module.
 
 %files multimedia
 %{py_platsitedir}/PySide2/QtMultimedia.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_multimedia.xml
-%{py_platsitedir}/PySide2/typesystems/typesystem_multimedia_*
+%{_datadir}/PySide2/typesystems/typesystem_multimedia.xml
+%{_datadir}/PySide2/typesystems/typesystem_multimedia_*
 
 #------------------------------------------------------------------------------
 
@@ -137,7 +137,7 @@ PySide network module.
 
 %files network
 %{py_platsitedir}/PySide2/QtNetwork.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_network.*
+%{_datadir}/PySide2/typesystems/typesystem_network.*
 
 #------------------------------------------------------------------------------
 
@@ -151,7 +151,7 @@ PySide opengl module.
 
 %files opengl
 %{py_platsitedir}/PySide2/QtOpenGL.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_opengl*
+%{_datadir}/PySide2/typesystems/typesystem_opengl*
 
 #------------------------------------------------------------------------------
 
@@ -165,7 +165,7 @@ PySide script module.
 
 %files script
 %{py_platsitedir}/PySide2/QtScript.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_script.*
+%{_datadir}/PySide2/typesystems/typesystem_script.*
 
 #------------------------------------------------------------------------------
 
@@ -179,7 +179,7 @@ PySide scripttool module.
 
 %files scripttools
 %{py_platsitedir}/PySide2/QtScriptTools.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_scripttools.*
+%{_datadir}/PySide2/typesystems/typesystem_scripttools.*
 
 #------------------------------------------------------------------------------
 
@@ -193,7 +193,7 @@ PySide sql module.
 
 %files sql
 %{py_platsitedir}/PySide2/QtSql.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_sql.*
+%{_datadir}/PySide2/typesystems/typesystem_sql.*
 
 #------------------------------------------------------------------------------
 
@@ -207,7 +207,7 @@ PySide svg module.
 
 %files svg
 %{py_platsitedir}/PySide2/QtSvg.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_svg.*
+%{_datadir}/PySide2/typesystems/typesystem_svg.*
 
 #------------------------------------------------------------------------------
 
@@ -221,7 +221,7 @@ PySide test module.
 
 %files test
 %{py_platsitedir}/PySide2/QtTest.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_test.*
+%{_datadir}/PySide2/typesystems/typesystem_test.*
 
 #------------------------------------------------------------------------------
 
@@ -235,7 +235,7 @@ PySide uitools module.
 
 %files uitools
 %{py_platsitedir}/PySide2/QtUiTools.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_uitools.*
+%{_datadir}/PySide2/typesystems/typesystem_uitools.*
 
 #------------------------------------------------------------------------------
 
@@ -249,7 +249,7 @@ PySide webengine module.
 
 %files webengine
 %{py_platsitedir}/PySide2/QtWebEngine*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_webengine*
+%{_datadir}/PySide2/typesystems/typesystem_webengine*
 
 #------------------------------------------------------------------------------
 
@@ -263,7 +263,7 @@ PySide xmlpatterns module.
 
 %files xmlpatterns
 %{py_platsitedir}/PySide2/QtXmlPatterns.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_xmlpatterns*
+%{_datadir}/PySide2/typesystems/typesystem_xmlpatterns*
 
 #------------------------------------------------------------------------------
 
@@ -277,7 +277,7 @@ PySide xml module.
 
 %files xml
 %{py_platsitedir}/PySide2/QtXml.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_xml.*
+%{_datadir}/PySide2/typesystems/typesystem_xml.*
 
 #------------------------------------------------------------------------------
 
@@ -291,7 +291,7 @@ PySide charts module.
 
 %files charts
 %{py_platsitedir}/PySide2/QtCharts.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_charts*
+%{_datadir}/PySide2/typesystems/typesystem_charts*
 
 #------------------------------------------------------------------------------
 
@@ -305,7 +305,7 @@ PySide concurrent module.
 
 %files concurrent
 %{py_platsitedir}/PySide2/QtConcurrent.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_concurrent*
+%{_datadir}/PySide2/typesystems/typesystem_concurrent*
 
 #------------------------------------------------------------------------------
 
@@ -319,7 +319,7 @@ PySide location module.
 
 %files location
 %{py_platsitedir}/PySide2/QtLocation.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_location*
+%{_datadir}/PySide2/typesystems/typesystem_location*
 
 #------------------------------------------------------------------------------
 
@@ -333,7 +333,7 @@ PySide multimediawidgets module.
 
 %files multimediawidgets
 %{py_platsitedir}/PySide2/QtMultimediaWidgets.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_multimediawidgets*
+%{_datadir}/PySide2/typesystems/typesystem_multimediawidgets*
 
 #------------------------------------------------------------------------------
 
@@ -347,7 +347,7 @@ PySide positioning module.
 
 %files positioning
 %{py_platsitedir}/PySide2/QtPositioning.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_positioning*
+%{_datadir}/PySide2/typesystems/typesystem_positioning*
 
 #------------------------------------------------------------------------------
 
@@ -361,7 +361,7 @@ PySide printsupport module.
 
 %files printsupport
 %{py_platsitedir}/PySide2/QtPrintSupport.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_printsupport*
+%{_datadir}/PySide2/typesystems/typesystem_printsupport*
 
 #------------------------------------------------------------------------------
 
@@ -375,7 +375,7 @@ PySide qml module.
 
 %files qml
 %{py_platsitedir}/PySide2/QtQml.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_qml*
+%{_datadir}/PySide2/typesystems/typesystem_qml*
 
 #------------------------------------------------------------------------------
 
@@ -389,7 +389,7 @@ PySide quick module.
 
 %files quick
 %{py_platsitedir}/PySide2/QtQuick.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_quick.xml
+%{_datadir}/PySide2/typesystems/typesystem_quick.xml
 
 #------------------------------------------------------------------------------
 
@@ -403,7 +403,7 @@ PySide quickwidgets module.
 
 %files quickwidgets
 %{py_platsitedir}/PySide2/QtQuickWidgets.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_quickwidgets*
+%{_datadir}/PySide2/typesystems/typesystem_quickwidgets*
 
 #------------------------------------------------------------------------------
 
@@ -417,7 +417,7 @@ PySide sensors module.
 
 %files sensors
 %{py_platsitedir}/PySide2/QtSensors.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_sensors*
+%{_datadir}/PySide2/typesystems/typesystem_sensors*
 
 #------------------------------------------------------------------------------
 
@@ -431,7 +431,7 @@ PySide texttospeech module.
 
 %files texttospeech
 %{py_platsitedir}/PySide2/QtTextToSpeech.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_texttospeech*
+%{_datadir}/PySide2/typesystems/typesystem_texttospeech*
 
 #------------------------------------------------------------------------------
 
@@ -445,7 +445,7 @@ PySide webchannel module.
 
 %files webchannel
 %{py_platsitedir}/PySide2/QtWebChannel.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_webchannel*
+%{_datadir}/PySide2/typesystems/typesystem_webchannel*
 
 #------------------------------------------------------------------------------
 
@@ -459,7 +459,7 @@ PySide websockets module.
 
 %files websockets
 %{py_platsitedir}/PySide2/QtWebSockets.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_websockets*
+%{_datadir}/PySide2/typesystems/typesystem_websockets*
 
 #------------------------------------------------------------------------------
 
@@ -473,7 +473,7 @@ PySide widgets module.
 
 %files widgets
 %{py_platsitedir}/PySide2/QtWidgets.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_widgets*
+%{_datadir}/PySide2/typesystems/typesystem_widgets*
 
 #------------------------------------------------------------------------------
 
@@ -487,20 +487,7 @@ PySide x11extras module.
 
 %files x11extras
 %{py_platsitedir}/PySide2/QtX11Extras.*.so
-%{py_platsitedir}/PySide2/typesystems/typesystem_x11extras*
-
-#------------------------------------------------------------------------------
-
-%package -n python-shiboken2
-Summary:        PySide shiboken2 module
-Group:          Development/KDE and Qt
-
-%description -n python-shiboken2
-PySide shiboken2 module.
-
-%files -n python-shiboken2
-%{py_platsitedir}/PySide2/libshiboken2.*
-%{py_platsitedir}/PySide2/shiboken2*
+%{_datadir}/PySide2/typesystems/typesystem_x11extras*
 
 #------------------------------------------------------------------------------
 
@@ -552,15 +539,11 @@ Group:		Development/KDE and Qt
 PySide core module.
 
 %files -n python2-pyside2-core
-%{py2_platsitedir}/*.egg-info
 %{py2_platsitedir}/PySide2/QtCore.so
 %{py2_platsitedir}/PySide2/__init__.py
 %{py2_platsitedir}/PySide2/_config.py
 %{py2_platsitedir}/PySide2/_git_pyside_version.py
-%{py2_platsitedir}/PySide2/libpyside2%{py2verflags}.so.%{api}*
-%{py2_platsitedir}/PySide2/typesystems/typesystem_core*
-%{py2_platsitedir}/PySide2/typesystems/typesystem_templates.*
-%{py2_platsitedir}/PySide2/support
+%{_libdir}/libpyside2%{py2verflags}.so.%{api}*
 
 #------------------------------------------------------------------------------
 
@@ -574,7 +557,6 @@ PySide gui module.
 
 %files -n python2-pyside2-gui
 %{py2_platsitedir}/PySide2/QtGui.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_gui*
 
 #------------------------------------------------------------------------------
 
@@ -588,7 +570,6 @@ PySide help module.
 
 %files -n python2-pyside2-help
 %{py2_platsitedir}/PySide2/QtHelp.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_help.*
 
 #------------------------------------------------------------------------------
 
@@ -602,8 +583,6 @@ PySide multimedia module.
 
 %files -n python2-pyside2-multimedia
 %{py2_platsitedir}/PySide2/QtMultimedia.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_multimedia.xml
-%{py2_platsitedir}/PySide2/typesystems/typesystem_multimedia_*
 
 
 #------------------------------------------------------------------------------
@@ -618,7 +597,6 @@ PySide network module.
 
 %files -n python2-pyside2-network
 %{py2_platsitedir}/PySide2/QtNetwork.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_network.*
 
 #------------------------------------------------------------------------------
 
@@ -632,7 +610,6 @@ PySide opengl module.
 
 %files -n python2-pyside2-opengl
 %{py2_platsitedir}/PySide2/QtOpenGL.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_opengl*
 
 #------------------------------------------------------------------------------
 
@@ -646,7 +623,6 @@ PySide script module.
 
 %files -n python2-pyside2-script
 %{py2_platsitedir}/PySide2/QtScript.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_script.*
 
 #------------------------------------------------------------------------------
 
@@ -660,7 +636,6 @@ PySide scripttool module.
 
 %files -n python2-pyside2-scripttools
 %{py2_platsitedir}/PySide2/QtScriptTools.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_scripttools.*
 
 #------------------------------------------------------------------------------
 
@@ -674,7 +649,6 @@ PySide sql module.
 
 %files -n python2-pyside2-sql
 %{py2_platsitedir}/PySide2/QtSql.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_sql.*
 
 #------------------------------------------------------------------------------
 
@@ -688,7 +662,6 @@ PySide svg module.
 
 %files -n python2-pyside2-svg
 %{py2_platsitedir}/PySide2/QtSvg.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_svg.*
 
 #------------------------------------------------------------------------------
 
@@ -702,7 +675,6 @@ PySide test module.
 
 %files -n python2-pyside2-test
 %{py2_platsitedir}/PySide2/QtTest.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_test.*
 
 #------------------------------------------------------------------------------
 
@@ -716,7 +688,6 @@ PySide uitools module.
 
 %files -n python2-pyside2-uitools
 %{py2_platsitedir}/PySide2/QtUiTools.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_uitools.*
 
 #------------------------------------------------------------------------------
 
@@ -730,7 +701,6 @@ PySide webengine module.
 
 %files -n python2-pyside2-webengine
 %{py2_platsitedir}/PySide2/QtWebEngine*.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_webengine*
 
 #------------------------------------------------------------------------------
 
@@ -744,7 +714,6 @@ PySide xmlpatterns module.
 
 %files -n python2-pyside2-xmlpatterns
 %{py2_platsitedir}/PySide2/QtXmlPatterns.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_xmlpatterns*
 
 #------------------------------------------------------------------------------
 
@@ -758,7 +727,6 @@ PySide xml module.
 
 %files -n python2-pyside2-xml
 %{py2_platsitedir}/PySide2/QtXml.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_xml.*
 
 #------------------------------------------------------------------------------
 
@@ -772,7 +740,6 @@ PySide2 charts module.
 
 %files -n python2-pyside2-charts
 %{py2_platsitedir}/PySide2/QtCharts.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_charts*
 
 #------------------------------------------------------------------------------
 
@@ -786,7 +753,6 @@ PySide2 concurrent module.
 
 %files -n python2-pyside2-concurrent
 %{py2_platsitedir}/PySide2/QtConcurrent.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_concurrent*
 
 #------------------------------------------------------------------------------
 
@@ -800,7 +766,6 @@ PySide2 location module.
 
 %files -n python2-pyside2-location
 %{py2_platsitedir}/PySide2/QtLocation.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_location*
 
 #------------------------------------------------------------------------------
 
@@ -814,7 +779,6 @@ PySide2 multimediawidgets module.
 
 %files -n python2-pyside2-multimediawidgets
 %{py2_platsitedir}/PySide2/QtMultimediaWidgets.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_multimediawidgets*
 
 #------------------------------------------------------------------------------
 
@@ -828,7 +792,6 @@ PySide2 positioning module.
 
 %files -n python2-pyside2-positioning
 %{py2_platsitedir}/PySide2/QtPositioning.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_positioning*
 
 #------------------------------------------------------------------------------
 
@@ -842,7 +805,6 @@ PySide2 printsupport module.
 
 %files -n python2-pyside2-printsupport
 %{py2_platsitedir}/PySide2/QtPrintSupport.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_printsupport*
 
 #------------------------------------------------------------------------------
 
@@ -856,7 +818,6 @@ PySide2 qml module.
 
 %files -n python2-pyside2-qml
 %{py2_platsitedir}/PySide2/QtQml.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_qml*
 
 #------------------------------------------------------------------------------
 
@@ -870,7 +831,6 @@ PySide2 quick module.
 
 %files -n python2-pyside2-quick
 %{py2_platsitedir}/PySide2/QtQuick.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_quick.xml
 
 #------------------------------------------------------------------------------
 
@@ -884,7 +844,6 @@ PySide2 quickwidgets module.
 
 %files -n python2-pyside2-quickwidgets
 %{py2_platsitedir}/PySide2/QtQuickWidgets.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_quickwidgets*
 
 #------------------------------------------------------------------------------
 
@@ -898,7 +857,6 @@ PySide2 sensors module.
 
 %files -n python2-pyside2-sensors
 %{py2_platsitedir}/PySide2/QtSensors.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_sensors*
 
 #------------------------------------------------------------------------------
 
@@ -912,7 +870,6 @@ PySide2 texttospeech module.
 
 %files -n python2-pyside2-texttospeech
 %{py2_platsitedir}/PySide2/QtTextToSpeech.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_texttospeech*
 
 #------------------------------------------------------------------------------
 
@@ -926,7 +883,6 @@ PySide2 webchannel module.
 
 %files -n python2-pyside2-webchannel
 %{py2_platsitedir}/PySide2/QtWebChannel.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_webchannel*
 
 #------------------------------------------------------------------------------
 
@@ -940,7 +896,6 @@ PySide2 websockets module.
 
 %files -n python2-pyside2-websockets
 %{py2_platsitedir}/PySide2/QtWebSockets.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_websockets*
 
 #------------------------------------------------------------------------------
 
@@ -954,7 +909,6 @@ PySide2 widgets module.
 
 %files -n python2-pyside2-widgets
 %{py2_platsitedir}/PySide2/QtWidgets.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_widgets*
 
 #------------------------------------------------------------------------------
 
@@ -968,23 +922,8 @@ PySide2 x11extras module.
 
 %files -n python2-pyside2-x11extras
 %{py2_platsitedir}/PySide2/QtX11Extras.so
-%{py2_platsitedir}/PySide2/typesystems/typesystem_x11extras*
 
 #------------------------------------------------------------------------------
-
-%package -n python2-shiboken2
-Summary:        PySide shiboken2 module
-Group:          Development/KDE and Qt
-
-%description -n python2-shiboken2
-PySide shiboken2 module.
-
-%files -n python2-shiboken2
-%{py2_platsitedir}/PySide2/libshiboken2*
-%{py2_platsitedir}/PySide2/shiboken2*
-
-#------------------------------------------------------------------------------
-
 
 %package devel
 Summary:        PySide devel files
@@ -996,21 +935,10 @@ Requires:       python2-%{name} = %{version}-%{release}
 PySide devel files.
 
 %files devel
-%{py2_platsitedir}/pyside2uic
-%{py2_platsitedir}/PySide2/pyside2-rcc
-%{py2_platsitedir}/PySide2/pyside2-lupdate
-%{py2_platsitedir}/PySide2/include
-%{py2_platsitedir}/PySide2/examples
-%{py2_platsitedir}/PySide2/scripts
-%{py2_platsitedir}/PySide2/docs
-%{py3_platsitedir}/pyside2uic
-%{py3_platsitedir}/PySide2/pyside2-rcc
-%{py3_platsitedir}/PySide2/pyside2-lupdate
-%{py3_platsitedir}/PySide2/include
-%{py3_platsitedir}/PySide2/examples
-%{py3_platsitedir}/PySide2/scripts
-%{py3_platsitedir}/PySide2/docs
-%{_bindir}/pyside2-uic
+%{_includedir}/PySide2
+%{_libdir}/pkgconfig/*.pc
+%{_libdir}/cmake/*
+%{_libdir}/*.so
 
 #------------------------------------------------------------------------------
 
@@ -1022,17 +950,24 @@ cp -a . %py2dir
 
 %build
 
-RPM_BUILD_NCPUS=$(/usr/bin/getconf _NPROCESSORS_ONLN)
-
 %define Werror_cflags %nil
-pushd %{py2dir}
-%__python2 setup.py build --jobs=$RPM_BUILD_NCPUS
+
+pushd %{py2dir}/sources/pyside2
+%cmake -DBUILD_TESTS=OFF \
+    -DUSE_PYTHON_VERSION=2
+%make
+
 popd
-%__python setup.py build --jobs=$RPM_BUILD_NCPUS
+
+pushd sources/pyside2
+%cmake -DBUILD_TESTS=OFF \
+     -DUSE_PYTHON_VERSION=3
+%make
+
+popd
 
 %install
-pushd %{py2dir}
-%__python2 setup.py install --skip-build --root=%{buildroot}
-popd
+%makeinstall_std -C %{py2dir}/sources/pyside2/build
 
-%__python setup.py install --skip-build --root=%{buildroot}
+%makeinstall_std -C sources/pyside2/build
+
