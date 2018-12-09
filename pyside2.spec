@@ -526,6 +526,8 @@ PySide x11extras module.
 #------------------------------------------------------------------------------
 
 %package -n python2-pyside2
+Summary:        PySide2 for python 2
+Group:          Development/KDE and Qt
 Requires:	python-shiboken2
 Requires:       python2-pyside2-core
 Requires:       python2-pyside2-gui
