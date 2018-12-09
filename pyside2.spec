@@ -58,6 +58,7 @@ BuildRequires:	pkgconfig(python3)
 BuildRequires:  python-setuptools 
 BuildRequires:	python-sphinx
 BuildRequires:	pkgconfig(shiboken2)
+BuildRequires:	qt5-assistant
 Requires:	python-shiboken2
 Requires:	pyside2-core
 Requires:	pyside2-gui
