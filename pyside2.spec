@@ -24,6 +24,7 @@ BuildRequires:  python2-setuptools
 BuildRequires:	pkgconfig(python3)
 BuildRequires:  python-setuptools 
 BuildRequires:	python-sphinx
+BuildRequires:	pkgconfig(shiboken2)
 Requires:	python-shiboken2
 Requires:	pyside2-core
 Requires:	pyside2-gui
