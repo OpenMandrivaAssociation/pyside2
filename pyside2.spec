@@ -118,9 +118,10 @@ PySide core module.
 
 %files core
 %{py_platsitedir}/PySide2/QtCore.*.so
-%{py_platsitedir}/PySide2/__init__.py
-%{py_platsitedir}/PySide2/_config.py
-%{py_platsitedir}/PySide2/_git_pyside_version.py
+%{py_platsitedir}/PySide2/__init__.py*
+%{py_platsitedir}/PySide2/_config.py*
+%{py_platsitedir}/PySide2/_git_pyside_version.py*
+%{py_platsitedir}/PySide2/__pycache__
 %{_datadir}/PySide2/typesystems/typesystem_core*
 %{_datadir}/PySide2/typesystems/typesystem_templates.*
 %{_libdir}/libpyside2.%{py3verflags}.so.%{api}*
@@ -585,9 +586,10 @@ PySide core module.
 
 %files -n python2-pyside2-core
 %{py2_platsitedir}/PySide2/QtCore.so
-%{py2_platsitedir}/PySide2/__init__.py
-%{py2_platsitedir}/PySide2/_config.py
-%{py2_platsitedir}/PySide2/_git_pyside_version.py
+%{py2_platsitedir}/PySide2/__init__.py*
+%{py2_platsitedir}/PySide2/_config.py*
+%{py2_platsitedir}/PySide2/_git_pyside_version.py*
+%{py2_platsitedir}/PySide2/__pycache__
 %{_libdir}/libpyside2%{py2verflags}.so.%{api}*
 
 #------------------------------------------------------------------------------
