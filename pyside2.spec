@@ -33,6 +33,8 @@ BuildRequires:  pkgconfig(Qt5Nfc)
 BuildRequires:  pkgconfig(Qt5OpenGL)
 BuildRequires:  pkgconfig(Qt5Positioning)
 BuildRequires:  pkgconfig(Qt5PositioningQuick)
+# work around package bug
+BuildRequires:	%{_lib}qt5positioningquick5
 BuildRequires:  pkgconfig(Qt5PrintSupport)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)
