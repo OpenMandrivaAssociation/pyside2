@@ -64,7 +64,7 @@ BuildRequires:  python-setuptools
 BuildRequires:	python-sphinx
 BuildRequires:	pkgconfig(shiboken2)
 BuildRequires:	qt5-assistant
-Requires:	python-shiboken2
+Requires:	shiboken2
 Requires:	pyside2-core
 Requires:	pyside2-gui
 Requires:	pyside2-help
@@ -532,7 +532,7 @@ PySide x11extras module.
 #------------------------------------------------------------------------------
 
 %package -n python2-pyside2
-Requires:	python-shiboken2
+Requires:	python2-shiboken2
 Requires:       python2-pyside2-core
 Requires:       python2-pyside2-gui
 Requires:       python2-pyside2-help
