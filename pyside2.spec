@@ -589,7 +589,6 @@ PySide core module.
 %{py2_platsitedir}/PySide2/__init__.py*
 %{py2_platsitedir}/PySide2/_config.py*
 %{py2_platsitedir}/PySide2/_git_pyside_version.py*
-%{py2_platsitedir}/PySide2/__pycache__
 %{_libdir}/libpyside2%{py2verflags}.so.%{api}*
 
 #------------------------------------------------------------------------------
