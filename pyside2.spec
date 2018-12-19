@@ -53,6 +53,7 @@ BuildRequires:  pkgconfig(Qt5X11Extras)
 BuildRequires:	pkgconfig(Qt5WebKit)
 BuildRequires:	pkgconfig(phonon4qt5)
 BuildRequires:	pkgconfig(python2)
+BuildRequires:	qt5-qtqml-private-devel
 BuildRequires:  python2-setuptools
 BuildRequires:	pkgconfig(python3)
 BuildRequires:  python-setuptools 
