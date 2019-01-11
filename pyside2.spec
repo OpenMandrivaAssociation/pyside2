@@ -2,13 +2,13 @@
 
 %define py3verflags %(python3 -c "import sysconfig; print(sysconfig.get_config_var('SOABI'))")
 %define py2verflags -python2.7
-%define api 5.11
+%define api 5.12
 
 %define debug_package %{nil}
 
 Summary:	The PySide project provides LGPL-licensed Python bindings for Qt5
 Name:		pyside2
-Version:	5.11.2
+Version:	5.12.0
 Release:	1
 License:	LGPLv2+
 Group:		Development/KDE and Qt
