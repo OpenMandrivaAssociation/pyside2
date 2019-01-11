@@ -123,7 +123,6 @@ PySide core module.
 %{py_platsitedir}/PySide2/_git_pyside_version.py*
 %{py_platsitedir}/PySide2/__pycache__
 %{_datadir}/PySide2/typesystems/typesystem_core*
-%{_datadir}/PySide2/typesystems/typesystem_templates.*
 %{_libdir}/libpyside2.%{py3verflags}.so.%{api}*
 
 #------------------------------------------------------------------------------
