@@ -2,13 +2,15 @@
 
 %define py3verflags %(python3 -c "import sysconfig; print(sysconfig.get_config_var('SOABI'))")
 %define py2verflags -python2.7
-%define api 5.12
+%define api %(echo %{version} |cut -d. -f1-2)
 
 %define debug_package %{nil}
 
+%bcond_without python2
+
 Summary:	The PySide project provides LGPL-licensed Python bindings for Qt5
 Name:		pyside2
-Version:	5.12.0
+Version:	5.13.0
 Release:	1
 License:	LGPLv2+
 Group:		Development/KDE and Qt
@@ -17,22 +19,58 @@ Source0:	https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-%{
 Source100:	%{name}.rpmlintrc
 BuildRequires:	cmake
 BuildRequires:	cmake(ECM)
+BuildRequires:	python-numpy-devel
+BuildRequires:	clang-devel
+BuildRequires:	llvm-devel
 BuildRequires:  pkgconfig(Qt5Bluetooth)
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5DBus)
 BuildRequires:  cmake(Qt5Designer)
 BuildRequires:  cmake(Qt5Enginio)
-BuildRequires:	pkgconfig(Qt5Charts)
-BuildRequires:  pkgconfig(Qt5Gui)
-BuildRequires:  pkgconfig(Qt5Help)
-BuildRequires:  pkgconfig(Qt5Location)
-BuildRequires:  pkgconfig(Qt5Multimedia)
-BuildRequires:  pkgconfig(Qt5MultimediaWidgets)
-BuildRequires:  pkgconfig(Qt5Network)
 BuildRequires:  pkgconfig(Qt5Nfc)
-BuildRequires:  pkgconfig(Qt5OpenGL)
-BuildRequires:  pkgconfig(Qt5Positioning)
 BuildRequires:  pkgconfig(Qt5PositioningQuick)
+BuildRequires:	cmake(Qt5Core)
+BuildRequires:	cmake(Qt5Gui)
+BuildRequires:	cmake(Qt5Widgets)
+BuildRequires:	cmake(Qt5PrintSupport)
+BuildRequires:	cmake(Qt5Sql)
+BuildRequires:	cmake(Qt5Network)
+BuildRequires:	cmake(Qt5Test)
+BuildRequires:	cmake(Qt5Concurrent)
+BuildRequires:	cmake(Qt5X11Extras)
+BuildRequires:	cmake(Qt5Xml)
+BuildRequires:	cmake(Qt5XmlPatterns)
+BuildRequires:	cmake(Qt5Help)
+BuildRequires:	cmake(Qt5Multimedia)
+BuildRequires:	cmake(Qt5MultimediaWidgets)
+BuildRequires:	cmake(Qt5OpenGL)
+BuildRequires:	cmake(Qt5Positioning)
+BuildRequires:	cmake(Qt5Location)
+BuildRequires:	cmake(Qt5Qml)
+BuildRequires:	cmake(Qt5Quick)
+BuildRequires:	cmake(Qt5QuickWidgets)
+BuildRequires:	cmake(Qt5RemoteObjects)
+BuildRequires:	cmake(Qt5Scxml)
+BuildRequires:	cmake(Qt5Script)
+BuildRequires:	cmake(Qt5ScriptTools)
+BuildRequires:	cmake(Qt5Sensors)
+BuildRequires:	cmake(Qt5TextToSpeech)
+BuildRequires:	cmake(Qt5Charts)
+BuildRequires:	cmake(Qt5Svg)
+BuildRequires:	cmake(Qt5DataVisualization)
+BuildRequires:	cmake(Qt5UiTools)
+BuildRequires:	cmake(Qt5WebChannel)
+BuildRequires:	cmake(Qt5WebEngineCore)
+BuildRequires:	cmake(Qt5WebEngine)
+BuildRequires:	cmake(Qt5WebEngineWidgets)
+BuildRequires:	cmake(Qt5WebSockets)
+BuildRequires:	cmake(Qt53DCore)
+BuildRequires:	cmake(Qt53DRender)
+BuildRequires:	cmake(Qt53DInput)
+BuildRequires:	cmake(Qt53DLogic)
+BuildRequires:	cmake(Qt53DAnimation)
+BuildRequires:	cmake(Qt53DExtras)
+
 # work around package bug
 BuildRequires:	%{_lib}qt5positioningquick5
 BuildRequires:  pkgconfig(Qt5PrintSupport)
@@ -59,15 +97,11 @@ BuildRequires:  pkgconfig(Qt5XmlPatterns)
 BuildRequires:  pkgconfig(Qt5X11Extras)
 BuildRequires:	pkgconfig(Qt5WebKit)
 BuildRequires:	pkgconfig(phonon4qt5)
-BuildRequires:	pkgconfig(python2)
 BuildRequires:	qt5-qtqml-private-devel
-BuildRequires:  python2-setuptools
 BuildRequires:	pkgconfig(python3)
 BuildRequires:  python-setuptools 
 BuildRequires:	python-sphinx
-BuildRequires:	pkgconfig(shiboken2)
 BuildRequires:	qt5-assistant
-Requires:	shiboken2
 Requires:	pyside2-core
 Requires:	pyside2-gui
 Requires:	pyside2-help
@@ -98,6 +132,11 @@ Requires:	pyside2-webchannel
 Requires:	pyside2-websockets
 Requires:	pyside2-widgets
 Requires:	pyside2-x11extras
+%if %{with python2}
+BuildRequires:	pkgconfig(python2)
+BuildRequires:  python2-setuptools
+BuildRequires:	python2-numpy-devel
+%endif
 
 %description
 The PySide project provides LGPL-licensed Python bindings for the Qt
@@ -107,6 +146,62 @@ all of the platforms as Qt itself.
 
 %files
 
+#------------------------------------------------------------------------------
+%package -n shiboken2
+Summary:	Python binding generator for Qt libraries
+Group:		Development/KDE and Qt
+
+%description -n shiboken2
+Python binding generator for Qt libraries
+
+%files -n shiboken2
+%{_bindir}/shiboken2
+%{_bindir}/shiboken_tool.py
+%{py_platsitedir}/shiboken2
+%{py_platsitedir}/shiboken2_generator
+%{_mandir}/man1/*
+%{py_platsitedir}/shiboken2-%{version}-py3.7.egg-info
+%{py_platsitedir}/shiboken2_generator-%{version}-py3.7.egg-info
+
+#------------------------------------------------------------------------------
+%define shibokenlib %mklibname shiboken2 %{api}
+%package -n %{shibokenlib}
+Summary:	Shiboken Generator core library
+Group:		System/Libraries
+
+%description -n %{shibokenlib}
+Shiboken Generator core library
+
+%files -n %{shibokenlib}
+%{_libdir}/libshiboken2*cpython*.so.%{api}*
+
+#------------------------------------------------------------------------------
+%define shibokenlib_py2 %mklibname shiboken2_python2.7 %{api}
+%package -n %{shibokenlib_py2}
+Summary:	Shiboken Generator core library
+Group:		System/Libraries
+
+%description -n %{shibokenlib_py2}
+Shiboken Generator core library
+
+%if %{with python2}
+%files -n %{shibokenlib_py2}
+%{_libdir}/libshiboken2*python2*.so.%{api}*
+%endif
+
+#------------------------------------------------------------------------------
+%package -n python2-shiboken2
+Summary:	PySide shiboken2 module for Python 2.x
+Group:		Development/KDE and Qt
+
+%description -n python2-shiboken2
+PySide shiboken2 module for Python 2.x
+
+%if %{with python2}
+%files -n python2-shiboken2
+%{py2_platsitedir}/shiboken2
+%{py2_platsitedir}/shiboken2_generator
+%endif
 #------------------------------------------------------------------------------
 
 %package core
@@ -122,9 +217,14 @@ PySide core module.
 %{py_platsitedir}/PySide2/_config.py*
 %{py_platsitedir}/PySide2/_git_pyside_version.py*
 %{py_platsitedir}/PySide2/__pycache__
-%{_datadir}/PySide2/typesystems/typesystem_core*
-%{_datadir}/PySide2/typesystems/*_common.xml
 %{_libdir}/libpyside2.%{py3verflags}.so.%{api}*
+%dir %{_datadir}/PySide2/glue
+%{_datadir}/PySide2/glue/qtcore.cpp
+%dir %{_datadir}/PySide2/typesystems
+%{_datadir}/PySide2/typesystems/typesystem_core.xml
+%{_datadir}/PySide2/typesystems/typesystem_x11.xml
+%{_datadir}/PySide2/typesystems/*_common.xml
+%{py_platsitedir}/PySide2-%{version}-py3.7.egg-info
 
 #------------------------------------------------------------------------------
 
@@ -139,6 +239,31 @@ PySide gui module.
 %files gui
 %{py_platsitedir}/PySide2/QtGui.*.so
 %{_datadir}/PySide2/typesystems/typesystem_gui*
+%{_datadir}/PySide2/glue/qtgui.cpp
+
+#------------------------------------------------------------------------------
+
+%package 3d
+Summary:	PySide 3D module
+Group:		Development/KDE and Qt
+Requires:	python2-pyside2-core = %{version}
+
+%description 3d
+PySide 3D module.
+
+%files 3d
+%{py_platsitedir}/PySide2/Qt3DAnimation.*.so
+%{py_platsitedir}/PySide2/Qt3DCore.*.so
+%{py_platsitedir}/PySide2/Qt3DExtras.*.so
+%{py_platsitedir}/PySide2/Qt3DInput.*.so
+%{py_platsitedir}/PySide2/Qt3DLogic.*.so
+%{py_platsitedir}/PySide2/Qt3DRender.*.so
+%{_datadir}/PySide2/typesystems/typesystem_3danimation.xml
+%{_datadir}/PySide2/typesystems/typesystem_3dcore.xml
+%{_datadir}/PySide2/typesystems/typesystem_3dextras.xml
+%{_datadir}/PySide2/typesystems/typesystem_3dinput.xml
+%{_datadir}/PySide2/typesystems/typesystem_3dlogic.xml
+%{_datadir}/PySide2/typesystems/typesystem_3drender.xml
 
 #------------------------------------------------------------------------------
 
@@ -168,6 +293,7 @@ PySide multimedia module.
 %{py_platsitedir}/PySide2/QtMultimedia.*.so
 %{_datadir}/PySide2/typesystems/typesystem_multimedia.xml
 %{_datadir}/PySide2/typesystems/typesystem_multimedia_*
+%{_datadir}/PySide2/glue/qtmultimedia.cpp
 
 #------------------------------------------------------------------------------
 
@@ -182,6 +308,53 @@ PySide network module.
 %files network
 %{py_platsitedir}/PySide2/QtNetwork.*.so
 %{_datadir}/PySide2/typesystems/typesystem_network.*
+%{_datadir}/PySide2/glue/qtnetwork.cpp
+
+#------------------------------------------------------------------------------
+
+%package datavisualization
+Summary:	PySide data visualization module
+Group:		Development/KDE and Qt
+Requires:	pyside2-core = %{version}
+
+%description datavisualization
+PySide data visualization module.
+
+%files datavisualization
+%{py_platsitedir}/PySide2/QtDataVisualization.*.so
+%{_datadir}/PySide2/typesystems/typesystem_datavisualization.*
+%{_datadir}/PySide2/glue/qtdatavisualization.cpp
+
+
+#------------------------------------------------------------------------------
+
+%package remoteobjects
+Summary:	PySide remote objects module
+Group:		Development/KDE and Qt
+Requires:	pyside2-core = %{version}
+
+%description remoteobjects
+PySide remote objects module.
+
+%files remoteobjects
+%{py_platsitedir}/PySide2/QtRemoteObjects.*.so
+%{_datadir}/PySide2/typesystems/typesystem_remoteobjects.*
+
+
+#------------------------------------------------------------------------------
+
+%package scxml
+Summary:	PySide XML Scene Graph module
+Group:		Development/KDE and Qt
+Requires:	pyside2-core = %{version}
+
+%description scxml
+PySide XML Scene Graph module.
+
+%files scxml
+%{py_platsitedir}/PySide2/QtScxml.*.so
+%{_datadir}/PySide2/typesystems/typesystem_scxml.*
+
 
 #------------------------------------------------------------------------------
 
@@ -195,7 +368,9 @@ PySide opengl module.
 
 %files opengl
 %{py_platsitedir}/PySide2/QtOpenGL.*.so
+%{py_platsitedir}/PySide2/QtOpenGLFunctions.*.so
 %{_datadir}/PySide2/typesystems/typesystem_opengl*
+%{_datadir}/PySide2/glue/qtopengl.cpp
 
 #------------------------------------------------------------------------------
 
@@ -210,6 +385,7 @@ PySide script module.
 %files script
 %{py_platsitedir}/PySide2/QtScript.*.so
 %{_datadir}/PySide2/typesystems/typesystem_script.*
+%{_datadir}/PySide2/glue/qtscript.cpp
 
 #------------------------------------------------------------------------------
 
@@ -280,6 +456,7 @@ PySide uitools module.
 %files uitools
 %{py_platsitedir}/PySide2/QtUiTools.*.so
 %{_datadir}/PySide2/typesystems/typesystem_uitools.*
+%{_datadir}/PySide2/glue/qtuitools.cpp
 
 #------------------------------------------------------------------------------
 
@@ -308,6 +485,7 @@ PySide xmlpatterns module.
 %files xmlpatterns
 %{py_platsitedir}/PySide2/QtXmlPatterns.*.so
 %{_datadir}/PySide2/typesystems/typesystem_xmlpatterns*
+%{_datadir}/PySide2/glue/qtxmlpatterns.cpp
 
 #------------------------------------------------------------------------------
 
@@ -322,6 +500,7 @@ PySide xml module.
 %files xml
 %{py_platsitedir}/PySide2/QtXml.*.so
 %{_datadir}/PySide2/typesystems/typesystem_xml.*
+%{_datadir}/PySide2/glue/qtxml.cpp
 
 #------------------------------------------------------------------------------
 
@@ -406,6 +585,7 @@ PySide printsupport module.
 %files printsupport
 %{py_platsitedir}/PySide2/QtPrintSupport.*.so
 %{_datadir}/PySide2/typesystems/typesystem_printsupport*
+%{_datadir}/PySide2/glue/qtprintsupport.cpp
 
 #------------------------------------------------------------------------------
 
@@ -420,6 +600,7 @@ PySide qml module.
 %files qml
 %{py_platsitedir}/PySide2/QtQml.*.so
 %{_datadir}/PySide2/typesystems/typesystem_qml*
+%{_datadir}/PySide2/glue/qtqml.cpp
 
 #------------------------------------------------------------------------------
 
@@ -434,6 +615,7 @@ PySide quick module.
 %files quick
 %{py_platsitedir}/PySide2/QtQuick.*.so
 %{_datadir}/PySide2/typesystems/typesystem_quick.xml
+%{_datadir}/PySide2/glue/qtquick.cpp
 
 #------------------------------------------------------------------------------
 
@@ -518,6 +700,7 @@ PySide widgets module.
 %files widgets
 %{py_platsitedir}/PySide2/QtWidgets.*.so
 %{_datadir}/PySide2/typesystems/typesystem_widgets*
+%{_datadir}/PySide2/glue/qtwidgets.cpp
 
 #------------------------------------------------------------------------------
 
@@ -538,7 +721,6 @@ PySide x11extras module.
 %package -n python2-pyside2
 Summary:        PySide2 for python 2
 Group:          Development/KDE and Qt
-Requires:	python2-shiboken2
 Requires:       python2-pyside2-core
 Requires:       python2-pyside2-gui
 Requires:       python2-pyside2-help
@@ -603,6 +785,26 @@ PySide gui module.
 
 %files -n python2-pyside2-gui
 %{py2_platsitedir}/PySide2/QtGui.so
+%{_datadir}/PySide2/glue/qtgui.cpp
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-3d
+Summary:	PySide 3D module
+Group:		Development/KDE and Qt
+Requires:	python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-3d
+PySide 3D module.
+
+%files -n python2-pyside2-3d
+%{py2_platsitedir}/PySide2/Qt3DAnimation.so
+%{py2_platsitedir}/PySide2/Qt3DCore.so
+%{py2_platsitedir}/PySide2/Qt3DExtras.so
+%{py2_platsitedir}/PySide2/Qt3DInput.so
+%{py2_platsitedir}/PySide2/Qt3DLogic.so
+%{py2_platsitedir}/PySide2/Qt3DRender.so
+
 
 #------------------------------------------------------------------------------
 
@@ -646,6 +848,46 @@ PySide network module.
 
 #------------------------------------------------------------------------------
 
+%package -n python2-pyside2-datavisualization
+Summary:	PySide data visualization module
+Group:		Development/KDE and Qt
+Requires:	python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-datavisualization
+PySide data visualization module.
+
+%files -n python2-pyside2-datavisualization
+%{py2_platsitedir}/PySide2/QtDataVisualization.so
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-remoteobjects
+Summary:	PySide remote objects module
+Group:		Development/KDE and Qt
+Requires:	python2-pyside2-core = %{version}
+
+%description -n python2-pyside2-remoteobjects
+PySide remote objects module.
+
+%files -n python2-pyside2-remoteobjects
+%{py2_platsitedir}/PySide2/QtRemoteObjects.so
+
+#------------------------------------------------------------------------------
+
+%package -n python2-pyside2-scxml
+Summary:	PySide XML Scene Graph module
+Group:		Development/KDE and Qt
+Requires:	pyside2-core = %{version}
+
+%description -n python2-pyside2-scxml
+PySide XML Scene Graph module.
+
+%files -n python2-pyside2-scxml
+%{py2_platsitedir}/PySide2/QtScxml.so
+
+
+#------------------------------------------------------------------------------
+
 %package -n python2-pyside2-opengl
 Summary:	PySide opengl module
 Group:		Development/KDE and Qt
@@ -656,6 +898,7 @@ PySide opengl module.
 
 %files -n python2-pyside2-opengl
 %{py2_platsitedir}/PySide2/QtOpenGL.so
+%{py2_platsitedir}/PySide2/QtOpenGLFunctions.so
 
 #------------------------------------------------------------------------------
 
@@ -975,18 +1218,37 @@ PySide2 x11extras module.
 Summary:        PySide devel files
 Group:          Development/KDE and Qt
 Requires:       %{name} = %{version}-%{release}
-Requires:       python2-%{name} = %{version}-%{release}
 
 %description devel
 PySide devel files.
 
 %files devel
+%{_bindir}/pyside2-lupdate
+%{_bindir}/pyside2-rcc
+%{_bindir}/pyside2-uic
+%{_bindir}/pyside_tool.py
+%{_includedir}/shiboken2
 %{_includedir}/PySide2
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/cmake/*
 %{_libdir}/*.so
 %{_datadir}/PySide2/glue
 %{_datadir}/PySide2/typesystems/glue
+%{py_platsitedir}/pyside2uic
+
+#------------------------------------------------------------------------------
+
+%package python2-devel
+Summary:        PySide devel files for Python 2.x
+Group:          Development/KDE and Qt
+Requires:       %{name}-devel = %{version}-%{release}
+Requires:       python2-%{name} = %{version}-%{release}
+
+%description python2-devel
+PySide devel files for Python 2.x.
+
+%files python2-devel
+%{py2_platsitedir}/pyside2uic
 
 #------------------------------------------------------------------------------
 
@@ -994,28 +1256,49 @@ PySide devel files.
 %prep
 %setup -qn pyside-setup-everywhere-src-%{version}
 
+%if %{with python2}
 cp -a . %py2dir
 
-%build
+pushd %{py2dir}
+%cmake_qt5 -DBUILD_TESTS=OFF \
+	-DUSE_PYTHON_VERSION=2 \
+	-G Ninja
+popd
+%endif
 
+%cmake_qt5 -DBUILD_TESTS=OFF \
+	-DUSE_PYTHON_VERSION=3 \
+	-G Ninja
+
+%build
 %define Werror_cflags %nil
 
-pushd %{py2dir}/sources/pyside2
-%cmake -DBUILD_TESTS=OFF \
-    -DUSE_PYTHON_VERSION=2
-%make
-
+%if %{with python2}
+pushd %{py2dir}
+%ninja_build -C build
 popd
+%endif
 
-pushd sources/pyside2
-%cmake -DBUILD_TESTS=OFF \
-     -DUSE_PYTHON_VERSION=3
-%make
+%ninja_build -C build
 
-popd
 
 %install
-%makeinstall_std -C %{py2dir}/sources/pyside2/build
+%if %{with python2}
+pushd %{py2dir}
+%ninja_install -C build
+popd
+%endif
 
-%makeinstall_std -C sources/pyside2/build
+%ninja_install -C build
+python setup.py egg_info
+for name in PySide2 shiboken2 shiboken2_generator; do
+	mkdir -p %{buildroot}%{py_platsitedir}/$name-%{version}-py3.7.egg-info
+	cp -p $name.egg-info/{PKG-INFO,not-zip-safe,top_level.txt} \
+		%{buildroot}%{py_platsitedir}/$name-%{version}-py3.7.egg-info/
+done
 
+# FIXME need to make sure those are actually safe to remove and not
+# e.g. read by shiboken while generating bindings for applications
+# but for now, it LOOKS safe...
+rm -f	%{buildroot}%{_datadir}/PySide2/typesystems/typesystem_core_mac.xml \
+	%{buildroot}%{_datadir}/PySide2/typesystems/typesystem_core_win.xml
