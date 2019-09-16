@@ -11,7 +11,7 @@
 Summary:	The PySide project provides LGPL-licensed Python bindings for Qt5
 Name:		pyside2
 Version:	5.13.1
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		Development/KDE and Qt
 Url:		https://wiki.qt.io/Qt_for_Python
@@ -22,13 +22,13 @@ BuildRequires:	cmake(ECM)
 BuildRequires:	python-numpy-devel
 BuildRequires:	clang-devel
 BuildRequires:	llvm-devel
-BuildRequires:  pkgconfig(Qt5Bluetooth)
-BuildRequires:  pkgconfig(Qt5Core)
-BuildRequires:  pkgconfig(Qt5DBus)
-BuildRequires:  cmake(Qt5Designer)
-BuildRequires:  cmake(Qt5Enginio)
-BuildRequires:  pkgconfig(Qt5Nfc)
-BuildRequires:  pkgconfig(Qt5PositioningQuick)
+BuildRequires:	pkgconfig(Qt5Bluetooth)
+BuildRequires:	pkgconfig(Qt5Core)
+BuildRequires:	pkgconfig(Qt5DBus)
+BuildRequires:	cmake(Qt5Designer)
+BuildRequires:	cmake(Qt5Enginio)
+BuildRequires:	pkgconfig(Qt5Nfc)
+BuildRequires:	pkgconfig(Qt5PositioningQuick)
 BuildRequires:	cmake(Qt5Core)
 BuildRequires:	cmake(Qt5Gui)
 BuildRequires:	cmake(Qt5Widgets)
@@ -73,33 +73,33 @@ BuildRequires:	cmake(Qt53DExtras)
 
 # work around package bug
 BuildRequires:	%{_lib}qt5positioningquick5
-BuildRequires:  pkgconfig(Qt5PrintSupport)
-BuildRequires:  pkgconfig(Qt5Qml)
-BuildRequires:  pkgconfig(Qt5Quick)
-BuildRequires:  pkgconfig(Qt5QuickWidgets)
+BuildRequires:	pkgconfig(Qt5PrintSupport)
+BuildRequires:	pkgconfig(Qt5Qml)
+BuildRequires:	pkgconfig(Qt5Quick)
+BuildRequires:	pkgconfig(Qt5QuickWidgets)
 BuildRequires:	pkgconfig(Qt5Script)
 BuildRequires:	pkgconfig(Qt5ScriptTools)
-BuildRequires:  pkgconfig(Qt5Sensors)
-BuildRequires:  pkgconfig(Qt5SerialPort)
-BuildRequires:  pkgconfig(Qt5Sql)
-BuildRequires:  pkgconfig(Qt5Svg)
-BuildRequires:  pkgconfig(Qt5Test)
+BuildRequires:	pkgconfig(Qt5Sensors)
+BuildRequires:	pkgconfig(Qt5SerialPort)
+BuildRequires:	pkgconfig(Qt5Sql)
+BuildRequires:	pkgconfig(Qt5Svg)
+BuildRequires:	pkgconfig(Qt5Test)
 BuildRequires:	pkgconfig(Qt5TextToSpeech)
-BuildRequires:  pkgconfig(Qt5WebChannel)
-BuildRequires:  pkgconfig(Qt5WebEngine)
-BuildRequires:  pkgconfig(Qt5WebEngineCore)
-BuildRequires:  pkgconfig(Qt5WebEngineWidgets)
-BuildRequires:  pkgconfig(Qt5WebKit)
-BuildRequires:  pkgconfig(Qt5WebKitWidgets)
-BuildRequires:  pkgconfig(Qt5WebSockets)
-BuildRequires:  pkgconfig(Qt5Widgets)
-BuildRequires:  pkgconfig(Qt5XmlPatterns)
-BuildRequires:  pkgconfig(Qt5X11Extras)
+BuildRequires:	pkgconfig(Qt5WebChannel)
+BuildRequires:	pkgconfig(Qt5WebEngine)
+BuildRequires:	pkgconfig(Qt5WebEngineCore)
+BuildRequires:	pkgconfig(Qt5WebEngineWidgets)
+BuildRequires:	pkgconfig(Qt5WebKit)
+BuildRequires:	pkgconfig(Qt5WebKitWidgets)
+BuildRequires:	pkgconfig(Qt5WebSockets)
+BuildRequires:	pkgconfig(Qt5Widgets)
+BuildRequires:	pkgconfig(Qt5XmlPatterns)
+BuildRequires:	pkgconfig(Qt5X11Extras)
 BuildRequires:	pkgconfig(Qt5WebKit)
 BuildRequires:	pkgconfig(phonon4qt5)
 BuildRequires:	qt5-qtqml-private-devel
 BuildRequires:	pkgconfig(python3)
-BuildRequires:  python-setuptools 
+BuildRequires:	python-setuptools
 BuildRequires:	python-sphinx
 BuildRequires:	qt5-assistant
 Requires:	pyside2-core
@@ -134,7 +134,7 @@ Requires:	pyside2-widgets
 Requires:	pyside2-x11extras
 %if %{with python2}
 BuildRequires:	pkgconfig(python2)
-BuildRequires:  python2-setuptools
+BuildRequires:	python2-setuptools
 BuildRequires:	python2-numpy-devel
 %endif
 
@@ -150,9 +150,10 @@ all of the platforms as Qt itself.
 %package -n shiboken2
 Summary:	Python binding generator for Qt libraries
 Group:		Development/KDE and Qt
+Obsoletes:	shiboken2 < 5.13.0-2
 
 %description -n shiboken2
-Python binding generator for Qt libraries
+Python binding generator for Qt libraries.
 
 %files -n shiboken2
 %{_bindir}/shiboken2
@@ -170,19 +171,21 @@ Summary:	Shiboken Generator core library
 Group:		System/Libraries
 
 %description -n %{shibokenlib}
-Shiboken Generator core library
+Shiboken Generator core library.
 
 %files -n %{shibokenlib}
 %{_libdir}/libshiboken2*cpython*.so.%{api}*
 
 #------------------------------------------------------------------------------
+%if %{with python2}
 %define shibokenlib_py2 %mklibname shiboken2_python2.7 %{api}
+
 %package -n %{shibokenlib_py2}
 Summary:	Shiboken Generator core library
 Group:		System/Libraries
 
 %description -n %{shibokenlib_py2}
-Shiboken Generator core library
+Shiboken Generator core library.
 
 %if %{with python2}
 %files -n %{shibokenlib_py2}
@@ -195,9 +198,8 @@ Summary:	PySide shiboken2 module for Python 2.x
 Group:		Development/KDE and Qt
 
 %description -n python2-shiboken2
-PySide shiboken2 module for Python 2.x
+PySide shiboken2 module for Python 2.x/.
 
-%if %{with python2}
 %files -n python2-shiboken2
 %{py2_platsitedir}/shiboken2
 %{py2_platsitedir}/shiboken2_generator
@@ -718,28 +720,29 @@ PySide x11extras module.
 
 #------------------------------------------------------------------------------
 
+%if %{with python2}
 %package -n python2-pyside2
-Summary:        PySide2 for python 2
-Group:          Development/KDE and Qt
-Requires:       python2-pyside2-core
-Requires:       python2-pyside2-gui
-Requires:       python2-pyside2-help
-Requires:       python2-pyside2-multimedia
-Requires:       python2-pyside2-network
-Requires:       python2-pyside2-opengl
-Requires:       python2-pyside2-script
-Requires:       python2-pyside2-scripttools
-Requires:       python2-pyside2-sql
-Requires:       python2-pyside2-test
-Requires:       python2-pyside2-xmlpatterns
-Requires:       python2-pyside2-xml
-Requires:       python2-pyside2-uitools
-Requires:       python2-pyside2-svg
-Requires:       python2-pyside2-webengine
+Summary:	PySide2 for python 2
+Group:		Development/KDE and Qt
+Requires:	python2-pyside2-core
+Requires:	python2-pyside2-gui
+Requires:	python2-pyside2-help
+Requires:	python2-pyside2-multimedia
+Requires:	python2-pyside2-network
+Requires:	python2-pyside2-opengl
+Requires:	python2-pyside2-script
+Requires:	python2-pyside2-scripttools
+Requires:	python2-pyside2-sql
+Requires:	python2-pyside2-test
+Requires:	python2-pyside2-xmlpatterns
+Requires:	python2-pyside2-xml
+Requires:	python2-pyside2-uitools
+Requires:	python2-pyside2-svg
+Requires:	python2-pyside2-webengine
 Requires:	python2-pyside2-charts
 Requires:	python2-pyside2-concurrent
 Requires:	python2-pyside2-location
-Requires: 	python2-pyside2-multimediawidgets
+Requires:	python2-pyside2-multimediawidgets
 Requires:	python2-pyside2-positioning
 Requires:	python2-pyside2-printsupport
 Requires:	python2-pyside2-qml
@@ -1213,11 +1216,13 @@ PySide2 x11extras module.
 %{py2_platsitedir}/PySide2/QtX11Extras.so
 
 #------------------------------------------------------------------------------
+%endif
 
 %package devel
-Summary:        PySide devel files
-Group:          Development/KDE and Qt
-Requires:       %{name} = %{version}-%{release}
+Summary:	PySide devel files
+Group:		Development/KDE and Qt
+Requires:	%{name} = %{version}-%{release}
+Requires:	shiboken2 = %{EVRD}
 
 %description devel
 PySide devel files.
@@ -1239,10 +1244,10 @@ PySide devel files.
 #------------------------------------------------------------------------------
 
 %package python2-devel
-Summary:        PySide devel files for Python 2.x
-Group:          Development/KDE and Qt
-Requires:       %{name}-devel = %{version}-%{release}
-Requires:       python2-%{name} = %{version}-%{release}
+Summary:	PySide devel files for Python 2.x
+Group:		Development/KDE and Qt
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	python2-%{name} = %{version}-%{release}
 
 %description python2-devel
 PySide devel files for Python 2.x.
