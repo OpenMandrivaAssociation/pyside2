@@ -1304,6 +1304,9 @@ for name in PySide2 shiboken2 shiboken2_generator; do
 		%{buildroot}%{py_platsitedir}/$name-%{version}-py3.7.egg-info/
 done
 
+# icon_cache is not executable and therefore  should not have a shebang
+sed -i '/^#!/d' %{buildroot}%{python_sitearch}/pyside2uic/icon_cache.py
+
 # FIXME need to make sure those are actually safe to remove and not
 # e.g. read by shiboken while generating bindings for applications
 # but for now, it LOOKS safe...
