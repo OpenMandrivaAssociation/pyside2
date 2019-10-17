@@ -16,6 +16,7 @@ License:	LGPLv2+
 Group:		Development/KDE and Qt
 Url:		https://wiki.qt.io/Qt_for_Python
 Source0:	https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-%{version}-src/pyside-setup-everywhere-src-%{version}.tar.xz
+Patch0:         python38_classifier.patch
 Source100:	%{name}.rpmlintrc
 BuildRequires:	cmake
 BuildRequires:	cmake(ECM)
@@ -1260,6 +1261,7 @@ PySide devel files for Python 2.x.
 
 %prep
 %setup -qn pyside-setup-everywhere-src-%{version}
+%autopatch -p1
 
 %if %{with python2}
 cp -a . %py2dir
