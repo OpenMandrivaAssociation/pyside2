@@ -10,12 +10,12 @@
 
 Summary:	The PySide project provides LGPL-licensed Python bindings for Qt5
 Name:		pyside2
-Version:	5.13.1
-Release:	3
+Version:	5.13.2
+Release:	1
 License:	LGPLv2+
 Group:		Development/KDE and Qt
 Url:		https://wiki.qt.io/Qt_for_Python
-Source0:	https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-%{version}-src/pyside-setup-everywhere-src-%{version}.tar.xz
+Source0:	https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-%{version}-src/pyside-setup-opensource-src-%{version}.tar.xz
 Patch0:         python38_classifier.patch
 Source100:	%{name}.rpmlintrc
 BuildRequires:	cmake
@@ -1260,7 +1260,7 @@ PySide devel files for Python 2.x.
 
 
 %prep
-%setup -qn pyside-setup-everywhere-src-%{version}
+%setup -qn pyside-setup-opensource-src-%{version}
 %autopatch -p1
 
 %if %{with python2}
