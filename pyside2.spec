@@ -10,13 +10,12 @@
 
 Summary:	The PySide project provides LGPL-licensed Python bindings for Qt5
 Name:		pyside2
-Version:	5.13.2
+Version:	5.14.0
 Release:	1
 License:	LGPLv2+
 Group:		Development/KDE and Qt
 Url:		https://wiki.qt.io/Qt_for_Python
 Source0:	https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-%{version}-src/pyside-setup-opensource-src-%{version}.tar.xz
-Patch0:         python38_classifier.patch
 Source100:	%{name}.rpmlintrc
 BuildRequires:	cmake
 BuildRequires:	cmake(ECM)
@@ -138,6 +137,8 @@ BuildRequires:	pkgconfig(python2)
 BuildRequires:	python2-setuptools
 BuildRequires:	python2-numpy-devel
 %endif
+# cmake files act up when running into obsolete-ish Qt5Declarative
+BuildConflicts:	pkgconfig(Qt5Declarative)
 
 %description
 The PySide project provides LGPL-licensed Python bindings for the Qt
@@ -162,8 +163,8 @@ Python binding generator for Qt libraries.
 %{py_platsitedir}/shiboken2
 %{py_platsitedir}/shiboken2_generator
 %{_mandir}/man1/*
-%{py_platsitedir}/shiboken2-%{version}-py3.7.egg-info
-%{py_platsitedir}/shiboken2_generator-%{version}-py3.7.egg-info
+%{py_platsitedir}/shiboken2-%{version}-py3.8.egg-info
+%{py_platsitedir}/shiboken2_generator-%{version}-py3.8.egg-info
 
 #------------------------------------------------------------------------------
 %define shibokenlib %mklibname shiboken2 %{api}
@@ -227,7 +228,7 @@ PySide core module.
 %{_datadir}/PySide2/typesystems/typesystem_core.xml
 %{_datadir}/PySide2/typesystems/typesystem_core_x11.xml
 %{_datadir}/PySide2/typesystems/*_common.xml
-%{py_platsitedir}/PySide2-%{version}-py3.7.egg-info
+%{py_platsitedir}/PySide2-%{version}-py3.8.egg-info
 
 #------------------------------------------------------------------------------
 
@@ -1299,13 +1300,10 @@ popd
 %ninja_install -C build
 python setup.py egg_info
 for name in PySide2 shiboken2 shiboken2_generator; do
-	mkdir -p %{buildroot}%{py_platsitedir}/$name-%{version}-py3.7.egg-info
+	mkdir -p %{buildroot}%{py_platsitedir}/$name-%{version}-py3.8.egg-info
 	cp -p $name.egg-info/{PKG-INFO,not-zip-safe,top_level.txt} \
-		%{buildroot}%{py_platsitedir}/$name-%{version}-py3.7.egg-info/
+		%{buildroot}%{py_platsitedir}/$name-%{version}-py3.8.egg-info/
 done
-
-# icon_cache is not executable and therefore  should not have a shebang
-sed -i '/^#!/d' %{buildroot}%{python_sitearch}/pyside2uic/icon_cache.py
 
 # FIXME need to make sure those are actually safe to remove and not
 # e.g. read by shiboken while generating bindings for applications
