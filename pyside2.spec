@@ -1233,6 +1233,7 @@ PySide devel files.
 %{_bindir}/pyside2-lupdate
 %{_bindir}/pyside2-rcc
 %{_bindir}/pyside2-uic
+%{_bindir}/pyside2-designer
 %{_bindir}/pyside_tool.py
 %{_includedir}/shiboken2
 %{_includedir}/PySide2
@@ -1241,7 +1242,6 @@ PySide devel files.
 %{_libdir}/*.so
 %{_datadir}/PySide2/glue
 %{_datadir}/PySide2/typesystems/glue
-%{py_platsitedir}/pyside2uic
 
 #------------------------------------------------------------------------------
 
@@ -1255,7 +1255,6 @@ Requires:	python2-%{name} = %{version}-%{release}
 PySide devel files for Python 2.x.
 
 %files python2-devel
-%{py2_platsitedir}/pyside2uic
 
 #------------------------------------------------------------------------------
 
@@ -1303,6 +1302,12 @@ for name in PySide2 shiboken2 shiboken2_generator; do
 	mkdir -p %{buildroot}%{py_platsitedir}/$name-%{version}-py3.8.egg-info
 	cp -p $name.egg-info/{PKG-INFO,not-zip-safe,top_level.txt} \
 		%{buildroot}%{py_platsitedir}/$name-%{version}-py3.8.egg-info/
+done
+
+# Let's not conflict with regular (C++) Qt...
+cd %{buildroot}%{_bindir}
+for i in rcc uic designer; do
+	mv $i pyside2-${i}
 done
 
 # FIXME need to make sure those are actually safe to remove and not
