@@ -10,7 +10,7 @@
 
 Summary:	The PySide project provides LGPL-licensed Python bindings for Qt5
 Name:		pyside2
-Version:	5.14.0
+Version:	5.14.1
 Release:	1
 License:	LGPLv2+
 Group:		Development/KDE and Qt
