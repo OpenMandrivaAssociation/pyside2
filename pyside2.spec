@@ -5,8 +5,8 @@
 %define api %(echo %{version} |cut -d. -f1-2)
 
 %define debug_package %{nil}
-
-%bcond_without python2
+# python2-numpy not available since march 2020
+%bcond_with python2
 
 Summary:	The PySide project provides LGPL-licensed Python bindings for Qt5
 Name:		pyside2
