@@ -10,8 +10,8 @@
 
 Summary:	The PySide project provides LGPL-licensed Python bindings for Qt5
 Name:		pyside2
-Version:	5.14.1
-Release:	2
+Version:	5.15.1
+Release:	1
 License:	LGPLv2+
 Group:		Development/KDE and Qt
 Url:		https://wiki.qt.io/Qt_for_Python
@@ -49,6 +49,8 @@ BuildRequires:	cmake(Qt5Location)
 BuildRequires:	cmake(Qt5Qml)
 BuildRequires:	cmake(Qt5Quick)
 BuildRequires:	cmake(Qt5QuickWidgets)
+BuildRequires:	cmake(Qt5QuickControls2)
+BuildRequires:	cmake(Qt5SerialPort)
 BuildRequires:	cmake(Qt5RemoteObjects)
 BuildRequires:	cmake(Qt5Scxml)
 BuildRequires:	cmake(Qt5Script)
@@ -125,7 +127,9 @@ Requires:	pyside2-positioning
 Requires:	pyside2-printsupport
 Requires:	pyside2-qml
 Requires:	pyside2-quick
+Requires:	pyside2-quickcontrols
 Requires:	pyside2-quickwidgets
+Requires:	pyside2-serialport
 Requires:	pyside2-sensors
 Requires:	pyside2-texttospeech
 Requires:	pyside2-webchannel
@@ -705,6 +709,34 @@ PySide widgets module.
 %{py_platsitedir}/PySide2/QtWidgets.*.so
 %{_datadir}/PySide2/typesystems/typesystem_widgets*
 %{_datadir}/PySide2/glue/qtwidgets.cpp
+
+#------------------------------------------------------------------------------
+
+%package quickcontrols
+Summary:        PySide QtQuick Controls module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description quickcontrols
+PySide QtQuick Controls module.
+
+%files quickcontrols
+%{py_platsitedir}/PySide2/QtQuickControls2.*.so
+%{_datadir}/PySide2/typesystems/typesystem_quickcontrols2.xml
+
+#------------------------------------------------------------------------------
+
+%package serialport
+Summary:        PySide serial port module
+Group:          Development/KDE and Qt
+Requires:       pyside2-core = %{version}
+
+%description serialport
+PySide serial port module.
+
+%files serialport
+%{py_platsitedir}/PySide2/QtSerialPort.*.so
+%{_datadir}/PySide2/typesystems/typesystem_serialport.xml
 
 #------------------------------------------------------------------------------
 
