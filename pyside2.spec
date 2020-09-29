@@ -1252,6 +1252,18 @@ PySide2 x11extras module.
 %{py2_platsitedir}/PySide2/QtX11Extras.so
 
 #------------------------------------------------------------------------------
+
+%package python2-devel
+Summary:	PySide devel files for Python 2.x
+Group:		Development/KDE and Qt
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	python2-%{name} = %{version}-%{release}
+
+%description python2-devel
+PySide devel files for Python 2.x.
+
+%files python2-devel
+
 %endif
 
 %package devel
@@ -1278,20 +1290,6 @@ PySide devel files.
 %{_datadir}/PySide2/typesystems/glue
 
 #------------------------------------------------------------------------------
-
-%package python2-devel
-Summary:	PySide devel files for Python 2.x
-Group:		Development/KDE and Qt
-Requires:	%{name}-devel = %{version}-%{release}
-Requires:	python2-%{name} = %{version}-%{release}
-
-%description python2-devel
-PySide devel files for Python 2.x.
-
-%files python2-devel
-
-#------------------------------------------------------------------------------
-
 
 %prep
 %setup -qn pyside-setup-opensource-src-%{version}
