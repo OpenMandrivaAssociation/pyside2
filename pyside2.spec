@@ -19,16 +19,17 @@ Source0:	https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-%{
 Source100:	%{name}.rpmlintrc
 BuildRequires:	cmake
 BuildRequires:	cmake(ECM)
-BuildRequires:	python-numpy-devel
+BuildRequires:	python3dist(numpy)
 BuildRequires:	clang-devel
 BuildRequires:	llvm-devel
-BuildRequires:	pkgconfig(Qt5Bluetooth)
-BuildRequires:	pkgconfig(Qt5Core)
-BuildRequires:	pkgconfig(Qt5DBus)
+BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	cmake(Qt5Bluetooth)
+BuildRequires:	cmake(Qt5Core)
+BuildRequires:	cmake(Qt5DBus)
 BuildRequires:	cmake(Qt5Designer)
 BuildRequires:	cmake(Qt5Enginio)
-BuildRequires:	pkgconfig(Qt5Nfc)
-BuildRequires:	pkgconfig(Qt5PositioningQuick)
+BuildRequires:	cmake(Qt5Nfc)
+BuildRequires:	cmake(Qt5Positioning)
 BuildRequires:	cmake(Qt5Core)
 BuildRequires:	cmake(Qt5Gui)
 BuildRequires:	cmake(Qt5Widgets)
@@ -72,6 +73,7 @@ BuildRequires:	cmake(Qt53DInput)
 BuildRequires:	cmake(Qt53DLogic)
 BuildRequires:	cmake(Qt53DAnimation)
 BuildRequires:	cmake(Qt53DExtras)
+BuildRequires:	cmake(Qt5Location)
 
 # work around package bug
 BuildRequires:	%{_lib}qt5positioningquick5
