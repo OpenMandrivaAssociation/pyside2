@@ -169,8 +169,8 @@ Python binding generator for Qt libraries.
 %{py_platsitedir}/shiboken2
 %{py_platsitedir}/shiboken2_generator
 %{_mandir}/man1/*
-%{py_platsitedir}/shiboken2-%{version}-py3.8.egg-info
-%{py_platsitedir}/shiboken2_generator-%{version}-py3.8.egg-info
+%{py_platsitedir}/shiboken2-%{version}-py%{py_ver}.egg-info
+%{py_platsitedir}/shiboken2_generator-%{version}-py%{py_ver}.egg-info
 
 #------------------------------------------------------------------------------
 %define shibokenlib %mklibname shiboken2 %{api}
@@ -234,7 +234,7 @@ PySide core module.
 %{_datadir}/PySide2/typesystems/typesystem_core.xml
 %{_datadir}/PySide2/typesystems/typesystem_core_x11.xml
 %{_datadir}/PySide2/typesystems/*_common.xml
-%{py_platsitedir}/PySide2-%{version}-py3.8.egg-info
+%{py_platsitedir}/PySide2-%{version}-py%{py_ver}.egg-info
 
 #------------------------------------------------------------------------------
 
@@ -1320,7 +1320,6 @@ popd
 
 %ninja_build -C build
 
-
 %install
 %if %{with python2}
 pushd %{py2dir}
@@ -1331,9 +1330,9 @@ popd
 %ninja_install -C build
 python setup.py egg_info
 for name in PySide2 shiboken2 shiboken2_generator; do
-	mkdir -p %{buildroot}%{py_platsitedir}/$name-%{version}-py3.8.egg-info
+	mkdir -p %{buildroot}%{py_platsitedir}/$name-%{version}-py%{py_ver}.egg-info
 	cp -p $name.egg-info/{PKG-INFO,not-zip-safe,top_level.txt} \
-		%{buildroot}%{py_platsitedir}/$name-%{version}-py3.8.egg-info/
+		%{buildroot}%{py_platsitedir}/$name-%{version}-py%{py_ver}.egg-info/
 done
 
 # Let's not conflict with regular (C++) Qt...
