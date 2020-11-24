@@ -17,6 +17,7 @@ Group:		Development/KDE and Qt
 Url:		https://wiki.qt.io/Qt_for_Python
 Source0:	https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-%{version}-src/pyside-setup-opensource-src-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
+Patch0:		pyside-5.15.2-dont-use-unrecognized-option.patch
 BuildRequires:	cmake
 BuildRequires:	cmake(ECM)
 BuildRequires:	python3dist(numpy)
@@ -106,6 +107,7 @@ BuildRequires:	pkgconfig(python3)
 BuildRequires:	python-setuptools
 BuildRequires:	python-sphinx
 BuildRequires:	qt5-assistant
+BuildRequires:	python3dist(wheel)
 Requires:	pyside2-core
 Requires:	pyside2-gui
 Requires:	pyside2-help
@@ -1292,8 +1294,7 @@ PySide devel files.
 #------------------------------------------------------------------------------
 
 %prep
-%setup -qn pyside-setup-opensource-src-%{version}
-%autopatch -p1
+%autosetup -p1 -n pyside-setup-opensource-src-%{version}
 
 %if %{with python2}
 cp -a . %py2dir
