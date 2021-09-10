@@ -4,7 +4,6 @@
 %define py2verflags -python2.7
 %define api %(echo %{version} |cut -d. -f1-2)
 
-%define debug_package %{nil}
 # python2-numpy not available since march 2020
 %bcond_with python2
 
