@@ -158,3 +158,36 @@ Index: pyside-setup-opensource-src-5.15.2/sources/shiboken2/libshiboken/pep384im
      Py_INCREF(Py_TYPE(heaptype));
      auto *type = reinterpret_cast<SbkObjectType *>(heaptype);
  #if PY_VERSION_HEX < 0x03000000
+--- pyside-setup-opensource-src-5.15.3/sources/shiboken2/libshiboken/sbkenum.cpp
++++ pyside-setup-opensource-src-5.15.3/sources/shiboken2/libshiboken/sbkenum.cpp
+@@ -753,7 +753,7 @@
+     PyTuple_SetItem(bases, 0, reinterpret_cast<PyObject *>(basetype));
+     auto *type = reinterpret_cast<PyTypeObject *>(SbkType_FromSpecWithBases(&newspec, bases));
+     PyErr_Print();
+-    Py_TYPE(type) = SbkEnumType_TypeF();
++    Py_SET_TYPE(type, SbkEnumType_TypeF());
+ 
+     auto *enumType = reinterpret_cast<SbkEnumType *>(type);
+     PepType_SETP(enumType)->cppName = cppName;
+--- pyside-setup-opensource-src-5.15.3/sources/pyside2/libpyside/pysideqflags.cpp
++++ pyside-setup-opensource-src-5.15.3/sources/pyside2/libpyside/pysideqflags.cpp
+@@ -187,7 +187,7 @@
+         }
+         newspec.slots = SbkNewQFlagsType_spec.slots;
+         PyTypeObject *type = (PyTypeObject *)SbkType_FromSpec(&newspec);
+-        Py_TYPE(type) = &PyType_Type;
++        Py_SET_TYPE(type, &PyType_Type);
+ 
+         PySideQFlagsType *flagsType = reinterpret_cast<PySideQFlagsType *>(type);
+         PepType_PFTP(flagsType)->converterPtr = &PepType_PFTP(flagsType)->converter;
+--- pyside-setup-opensource-src-5.15.3/sources/pyside2/libpyside/pysidesignal.cpp
++++ pyside-setup-opensource-src-5.15.3/sources/pyside2/libpyside/pysidesignal.cpp
+@@ -162,7 +162,7 @@
+     if (!type) {
+         type = reinterpret_cast<PyTypeObject *>(SbkType_FromSpec(&PySideSignalType_spec));
+         PyTypeObject *hold = Py_TYPE(type);
+-        Py_TYPE(type) = PySideMetaSignalTypeF();
++        Py_SET_TYPE(type, PySideMetaSignalTypeF());
+         Py_INCREF(Py_TYPE(type));
+         Py_DECREF(hold);
+     }
