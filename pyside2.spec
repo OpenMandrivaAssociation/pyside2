@@ -17,6 +17,8 @@ Url:		https://wiki.qt.io/Qt_for_Python
 Source0:	https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-%{version}-src/pyside-setup-opensource-src-%{version}.tar.xz
 Source100:	%{name}.rpmlintrc
 Patch0:		pyside-5.15.2-dont-use-unrecognized-option.patch
+# (fedora)
+Patch1:		python3.10.patch
 BuildRequires:	cmake
 BuildRequires:	cmake(ECM)
 BuildRequires:	python3dist(numpy)
