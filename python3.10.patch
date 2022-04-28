@@ -191,3 +191,14 @@ Index: pyside-setup-opensource-src-5.15.2/sources/shiboken2/libshiboken/pep384im
          Py_INCREF(Py_TYPE(type));
          Py_DECREF(hold);
      }
+--- pyside-setup-opensource-src-5.15.3/sources/pyside2/libpyside/pysideweakref.cpp
++++ pyside-setup-opensource-src-5.15.3/sources/pyside2/libpyside/pysideweakref.cpp
+@@ -90,7 +90,7 @@
+ 
+     if (Py_TYPE(PySideCallableObjectTypeF()) == 0)
+     {
+-        Py_TYPE(PySideCallableObjectTypeF()) = &PyType_Type;
++        Py_SET_TYPE(PySideCallableObjectTypeF(), &PyType_Type);
+         PyType_Ready(PySideCallableObjectTypeF());
+     }
+ 
