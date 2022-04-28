@@ -18,7 +18,7 @@ Source0:	https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-%{
 Source100:	%{name}.rpmlintrc
 Patch0:		pyside-5.15.2-dont-use-unrecognized-option.patch
 # (fedora)
-Patch1:		python3.10.patch
+Patch1:		python3.11.patch
 BuildRequires:	cmake
 BuildRequires:	cmake(ECM)
 BuildRequires:	python3dist(numpy)
