@@ -19,6 +19,8 @@ Source100:	%{name}.rpmlintrc
 Patch0:		pyside-5.15.2-dont-use-unrecognized-option.patch
 # (fedora)
 Patch1:		python3.11.patch
+# (debian)
+Patch2:		shiboken6-Adapt-to-LLVM-12.01.patch
 BuildRequires:	cmake
 BuildRequires:	cmake(ECM)
 BuildRequires:	python3dist(numpy)
