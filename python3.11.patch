@@ -100,24 +100,6 @@
  #ifdef Py_LIMITED_API
  // We keep these definitions local, because they don't work in Python 2.
  # define PyUnicode_GET_LENGTH(op)    PyUnicode_GetLength((PyObject *)(op))
-@@ -751,9 +821,6 @@ _Pep_PrivateMangle(PyObject *self, PyObj
- #endif // IS_PY2
-     Shiboken::AutoDecRef privateobj(PyObject_GetAttr(
-         reinterpret_cast<PyObject *>(Py_TYPE(self)), Shiboken::PyMagicName::name()));
--#ifndef Py_LIMITED_API
--    return _Py_Mangle(privateobj, name);
--#else
-     // PYSIDE-1436: _Py_Mangle is no longer exposed; implement it always.
-     // The rest of this function is our own implementation of _Py_Mangle.
-     // Please compare the original function in compile.c .
-@@ -789,7 +856,6 @@ _Pep_PrivateMangle(PyObject *self, PyObj
-     if (amount > big_stack)
-         free(resbuf);
-     return result;
--#endif // else Py_LIMITED_API
- }
- 
- /*****************************************************************************
 --- pyside-setup-opensource-src-5.15.2/sources/shiboken2/libshiboken/pep384impl.h
 +++ pyside-setup-opensource-src-5.15.2/sources/shiboken2/libshiboken/pep384impl.h
 @@ -45,6 +45,11 @@
