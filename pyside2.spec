@@ -21,6 +21,7 @@ Patch0:		pyside-5.15.2-dont-use-unrecognized-option.patch
 Patch1:		python3.11.patch
 # (debian)
 Patch2:		shiboken6-Adapt-to-LLVM-12.01.patch
+Patch3:		pyside-5.15.2-fix-numpy.patch
 BuildRequires:	cmake
 BuildRequires:	cmake(ECM)
 BuildRequires:	python3dist(numpy)
