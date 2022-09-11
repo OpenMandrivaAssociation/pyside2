@@ -9,7 +9,7 @@
 
 Summary:	The PySide project provides LGPL-licensed Python bindings for Qt5
 Name:		pyside2
-Version:	5.15.5
+Version:	5.15.6
 Release:	1
 License:	LGPLv2+
 Group:		Development/KDE and Qt
@@ -18,10 +18,15 @@ Source0:	https://download.qt.io/official_releases/QtForPython/pyside2/PySide2-%{
 Source100:	%{name}.rpmlintrc
 Patch0:		pyside-5.15.2-dont-use-unrecognized-option.patch
 # (fedora)
-Patch1:		python3.11.patch
+Patch1:		https://src.fedoraproject.org/rpms/python-pyside2/raw/rawhide/f/pyside2-tools-obsolete.patch
+Patch2:		https://src.fedoraproject.org/rpms/python-pyside2/raw/rawhide/f/python-pyside2-options_py.patch
+Patch3:		https://src.fedoraproject.org/rpms/python-pyside2/raw/rawhide/f/python3.10.patch
+Patch4:		https://src.fedoraproject.org/rpms/python-pyside2/raw/rawhide/f/python3.11.patch
+Patch5:		https://raw.githubusercontent.com/NixOS/nixpkgs/master/pkgs/development/python-modules/shiboken2/nix_compile_cflags.patch
+Patch6:		https://src.fedoraproject.org/rpms/python-pyside2/raw/rawhide/f/build-tests.patch
 # (debian)
-Patch2:		shiboken6-Adapt-to-LLVM-12.01.patch
-Patch3:		pyside-5.15.2-fix-numpy.patch
+Patch10:	shiboken6-Adapt-to-LLVM-12.01.patch
+Patch11:	pyside-5.15.2-fix-numpy.patch
 BuildRequires:	cmake
 BuildRequires:	cmake(ECM)
 BuildRequires:	python3dist(numpy)
@@ -232,7 +237,6 @@ PySide core module.
 %{py_platsitedir}/PySide2/__init__.py*
 %{py_platsitedir}/PySide2/_config.py*
 %{py_platsitedir}/PySide2/_git_pyside_version.py*
-%{py_platsitedir}/PySide2/__pycache__
 %{_libdir}/libpyside2.%{py3verflags}.so.%{api}*
 %dir %{_datadir}/PySide2/glue
 %{_datadir}/PySide2/glue/qtcore.cpp
@@ -1283,8 +1287,6 @@ PySide devel files.
 
 %files devel
 %{_bindir}/pyside2-lupdate
-%{_bindir}/pyside2-rcc
-%{_bindir}/pyside2-uic
 %{_bindir}/pyside2-designer
 %{_bindir}/pyside_tool.py
 %{_includedir}/shiboken2
@@ -1342,7 +1344,8 @@ done
 
 # Let's not conflict with regular (C++) Qt...
 cd %{buildroot}%{_bindir}
-for i in rcc uic designer; do
+# We used to need rcc and uic here too... What happened to them?
+for i in designer; do
 	mv $i pyside2-${i}
 done
 
