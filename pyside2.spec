@@ -25,7 +25,7 @@ Patch4:		https://src.fedoraproject.org/rpms/python-pyside2/raw/rawhide/f/python3
 Patch5:		https://raw.githubusercontent.com/NixOS/nixpkgs/master/pkgs/development/python-modules/shiboken2/nix_compile_cflags.patch
 Patch6:		https://src.fedoraproject.org/rpms/python-pyside2/raw/rawhide/f/build-tests.patch
 # (debian)
-Patch10:	shiboken6-Adapt-to-LLVM-12.01.patch
+#Patch10:	shiboken6-Adapt-to-LLVM-12.01.patch
 Patch11:	pyside-5.15.2-fix-numpy.patch
 BuildRequires:	cmake
 BuildRequires:	cmake(ECM)
